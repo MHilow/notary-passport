@@ -37,14 +37,14 @@ export const PublicProfileView: React.FC<PublicProfileViewProps> = ({
     <div className="max-w-4xl mx-auto space-y-8 pb-16">
       
       {/* Zero Knowledge Public Notice Banner */}
-      <div className="p-3 bg-[#3F6B4F]/10 border-l-4 border-l-[#3F6B4F] border border-[#3F6B4F]/30 text-[#14181F] text-xs font-mono flex items-center justify-between gap-3">
+      <div className="p-3 bg-[#3F6B4F]/10 border-l-4 border-l-[#3F6B4F] border border-[#3F6B4F]/30 text-[#14181F] text-xs font-mono flex items-center justify-between gap-3 rounded-xl">
         <div className="flex items-center gap-2.5">
-          <ShieldCheck className="w-4 h-4 text-[#3F6B4F] shrink-0" />
+          <PassportSeal size={24} variant="navy" className="shrink-0" />
           <span>
             <strong>Zero-Knowledge Public Verification Profile:</strong> Credential validity and expiration dates are confirmed real-time.
           </span>
         </div>
-        <span className="font-bold text-[11px] text-[#1B2A4A] bg-[#FFFFFF] px-2 py-0.5 border border-[#D8D2C6] shrink-0">
+        <span className="font-bold text-[11px] text-[#1B2A4A] bg-[#FFFFFF] px-2 py-0.5 border border-[#D8D2C6] shrink-0 rounded-md">
           ID: {profile.handle}
         </span>
       </div>
@@ -75,7 +75,7 @@ export const PublicProfileView: React.FC<PublicProfileViewProps> = ({
         <div>
           <div className="flex items-center justify-between mb-4 border-b border-[#B8924A]/30 pb-2">
             <h2 className="font-serif font-bold text-lg text-[#F6F2E9] flex items-center gap-2">
-              <BookOpen className="w-5 h-5 text-[#B8924A]" />
+              <PassportSeal size={28} variant="gold" />
               Credential Verification Status ({verifiedCount}/{totalCount} Valid)
             </h2>
             <span className="text-xs font-mono text-[#B8924A]">State & Provincial Registry Verified</span>

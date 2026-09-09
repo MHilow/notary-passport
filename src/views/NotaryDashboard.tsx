@@ -126,11 +126,9 @@ export const NotaryDashboard: React.FC<NotaryDashboardProps> = ({
       </div>
 
       {/* Prominent State Registry Direct Verification Callout Banner */}
-      <div className="p-4 rounded-2xl bg-[#FFFFFF] border-2 border-[#B8924A] shadow-md flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-2xl bg-[#1B2A4A] text-[#B8924A] flex items-center justify-center shrink-0 border border-[#B8924A]/40">
-            <Building className="w-5 h-5" />
-          </div>
+      <div className="p-4 sm:p-5 rounded-2xl bg-[#FFFFFF] border-2 border-[#B8924A] shadow-md flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div className="flex items-center gap-3.5">
+          <PassportSeal size={40} variant="gold" className="shrink-0 drop-shadow-sm" />
           <div>
             <h4 className="font-serif font-bold text-sm text-[#1B2A4A] flex items-center gap-2">
               Official State & Provincial Verification Registries
@@ -236,7 +234,7 @@ export const NotaryDashboard: React.FC<NotaryDashboardProps> = ({
 
           {credentials.length === 0 ? (
             <div className="bg-white border-2 border-dashed border-[#E2DBCF] rounded-3xl p-10 text-center space-y-3">
-              <BookOpen className="w-10 h-10 text-[#B8924A] mx-auto" />
+              <ScallopedSeal size={64} showAccents={false} className="mx-auto" />
               <h3 className="font-serif font-bold text-lg text-[#14181F]">No Credential Documents Uploaded</h3>
               <p className="text-xs text-[#14181F]/70 font-sans max-w-sm mx-auto">
                 Upload your notary commission, E&O policy, background check, or state bond to activate zero-knowledge verification.
@@ -268,7 +266,8 @@ export const NotaryDashboard: React.FC<NotaryDashboardProps> = ({
           
           <div className="bg-white border-2 border-[#B8924A] rounded-3xl p-6 shadow-md space-y-4">
             <div className="flex items-center justify-between border-b border-[#E2DBCF] pb-3">
-              <h3 className="font-serif font-bold text-base text-[#14181F]">
+              <h3 className="font-serif font-bold text-base text-[#14181F] flex items-center gap-2">
+                <PassportSeal size={28} variant="navy" />
                 Jurisdiction Compliance Engine
               </h3>
               <select
@@ -335,7 +334,8 @@ export const NotaryDashboard: React.FC<NotaryDashboardProps> = ({
 
           {/* Audit Log */}
           <div className="bg-white border border-[#E2DBCF] rounded-3xl p-6 shadow-sm">
-            <h3 className="font-serif font-bold text-base text-[#14181F] mb-3 border-b border-[#E2DBCF] pb-2">
+            <h3 className="font-serif font-bold text-base text-[#14181F] mb-3 border-b border-[#E2DBCF] pb-2 flex items-center gap-2">
+              <PassportSeal size={24} variant="gold" />
               Verification Audit Trail
             </h3>
 

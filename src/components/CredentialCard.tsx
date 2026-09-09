@@ -3,6 +3,7 @@ import { Credential } from '../types';
 import { StatusBadge } from './StatusBadge';
 import { calculateCredentialStatus } from '../services/verificationEngine';
 import { getJurisdiction } from '../data/jurisdictions';
+import { PassportSeal } from './PassportSeal';
 import { Eye, ExternalLink, ShieldCheck, Trash2 } from 'lucide-react';
 
 interface CredentialCardProps {
@@ -24,23 +25,26 @@ export const CredentialCard: React.FC<CredentialCardProps> = ({
   const stateName = jurisdiction?.name || credential.jurisdictionCode || 'State';
 
   return (
-    <div className="bubbly-card flex flex-col justify-between">
+    <div className="bubbly-card flex flex-col justify-between relative overflow-hidden">
       
       {/* Top Header */}
       <div>
         <div className="flex items-start justify-between gap-3 mb-2">
-          <div>
-            <h3 className="font-serif font-bold text-lg text-[#1B2A4A] leading-snug">
-              {credential.title}
-            </h3>
-            <p className="text-xs text-[#14181F]/70 font-mono mt-0.5">
-              {credential.metadata?.policyNumber
-                ? `Policy #${credential.metadata.policyNumber}`
-                : credential.metadata?.commissionNumber
-                ? `Commission #${credential.metadata.commissionNumber}`
-                : credential.fileName}
-              {credential.jurisdictionCode && ` · ${credential.jurisdictionCode}`}
-            </p>
+          <div className="flex items-start gap-2.5">
+            <PassportSeal size={36} variant="navy" className="shrink-0 mt-0.5 opacity-90" />
+            <div>
+              <h3 className="font-serif font-bold text-base text-[#1B2A4A] leading-snug">
+                {credential.title}
+              </h3>
+              <p className="text-xs text-[#14181F]/70 font-mono mt-0.5">
+                {credential.metadata?.policyNumber
+                  ? `Policy #${credential.metadata.policyNumber}`
+                  : credential.metadata?.commissionNumber
+                  ? `Commission #${credential.metadata.commissionNumber}`
+                  : credential.fileName}
+                {credential.jurisdictionCode && ` · ${credential.jurisdictionCode}`}
+              </p>
+            </div>
           </div>
           <StatusBadge status={currentStatus} />
         </div>

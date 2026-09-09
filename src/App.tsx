@@ -11,6 +11,7 @@ import { ShareLinkModal } from './components/ShareLinkModal';
 import { JurisdictionDirectoryModal } from './components/JurisdictionDirectoryModal';
 import { Toast, ToastMessage } from './components/Toast';
 import { PassportSeal } from './components/PassportSeal';
+import { ScallopedSeal } from './components/ScallopedSeal';
 import { Credential } from './types';
 import { StatusBadge } from './components/StatusBadge';
 import { calculateCredentialStatus } from './services/verificationEngine';
@@ -132,14 +133,14 @@ export function App() {
       {/* Official Footer */}
       <footer className="border-t border-[#E2DBCF] bg-[#FFFFFF] py-6 text-center text-xs font-mono text-[#14181F]/70">
         <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <div className="flex items-center gap-2">
-            <PassportSeal size={28} variant="navy" />
-            <span className="font-serif font-bold text-[#1B2A4A]">NOTARY PASSPORT</span>
-            <span>— VERIFIED ONCE, TRUSTED EVERYWHERE</span>
+          <div className="flex items-center gap-3">
+            <PassportSeal size={36} variant="navy" className="drop-shadow-xs" />
+            <span className="font-serif font-bold text-[#1B2A4A] text-sm">NOTARY PASSPORT</span>
+            <span className="hidden sm:inline">— VERIFIED ONCE, TRUSTED EVERYWHERE</span>
           </div>
           <button
             onClick={() => setIsDirectoryOpen(true)}
-            className="verify-state-btn text-[11px] py-1 px-3"
+            className="verify-state-btn text-[11px] py-1.5 px-3.5"
           >
             <Building className="w-3.5 h-3.5 text-[#B8924A]" />
             View Official Government Directory 🏛️
@@ -195,10 +196,8 @@ export function App() {
           <div className="bg-[#FFFFFF] text-[#14181F] w-full max-w-2xl rounded-3xl border-2 border-[#B8924A] p-6 shadow-2xl space-y-4">
             
             <div className="flex items-center justify-between pb-3 border-b border-[#E2DBCF]">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-2xl bg-[#1B2A4A] text-[#B8924A] flex items-center justify-center border border-[#B8924A]/40">
-                  <FileText className="w-5 h-5" />
-                </div>
+              <div className="flex items-center gap-3.5">
+                <PassportSeal size={44} variant="navy" className="shrink-0 drop-shadow-sm" />
                 <div>
                   <h3 className="font-serif font-bold text-lg text-[#1B2A4A]">{viewingDocument.title}</h3>
                   <p className="text-xs font-mono text-[#14181F]/60">{viewingDocument.fileName} ({viewingDocument.fileSize})</p>
@@ -218,10 +217,10 @@ export function App() {
 
             {/* Document Preview Box */}
             <div className="h-80 rounded-2xl bg-[#F6F2E9] border-2 border-[#E2DBCF] p-6 flex flex-col items-center justify-center text-center relative overflow-hidden">
-              <div className="w-full max-w-md p-6 bg-[#FFFFFF] border border-[#E2DBCF] rounded-2xl space-y-4 text-xs font-mono text-[#14181F] shadow-md">
+              <div className="w-full max-w-md p-6 bg-[#FFFFFF] border border-[#E2DBCF] rounded-2xl space-y-4 text-xs font-mono text-[#14181F] shadow-md relative">
                 <div className="flex items-center justify-between border-b border-[#E2DBCF] pb-3">
                   <div className="font-serif font-bold text-sm text-[#1B2A4A] flex items-center gap-2 uppercase">
-                    <ShieldCheck className="w-4 h-4 text-[#3F6B4F]" />
+                    <PassportSeal size={24} variant="gold" />
                     Official Government Record
                   </div>
                   <span className="font-mono text-[10px] text-[#14181F]/60">{viewingDocument.id}</span>

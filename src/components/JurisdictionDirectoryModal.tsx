@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { JURISDICTIONS } from '../data/jurisdictions';
+import { PassportSeal } from './PassportSeal';
+import { ScallopedSeal } from './ScallopedSeal';
 import { X, ExternalLink, ShieldCheck, Search, Building2, CheckCircle2, Globe } from 'lucide-react';
 
 interface JurisdictionDirectoryModalProps {
@@ -37,10 +39,8 @@ export const JurisdictionDirectoryModal: React.FC<JurisdictionDirectoryModalProp
         
         {/* Modal Header */}
         <div className="flex items-center justify-between pb-4 border-b border-[#E2DBCF]">
-          <div className="flex items-center gap-3">
-            <div className="w-12 h-12 rounded-2xl bg-[#1B2A4A] text-[#B8924A] flex items-center justify-center border border-[#B8924A]/40 shadow-md">
-              <Building2 className="w-6 h-6" />
-            </div>
+          <div className="flex items-center gap-3.5">
+            <ScallopedSeal size={52} showAccents={false} className="shrink-0 drop-shadow-sm" />
             <div>
               <div className="flex items-center gap-2">
                 <h2 className="font-serif font-bold text-xl text-[#14181F]">Official Government Verification Directory</h2>
@@ -110,7 +110,8 @@ export const JurisdictionDirectoryModal: React.FC<JurisdictionDirectoryModalProp
                 className="p-4 rounded-2xl bg-[#FFFFFF] border border-[#E2DBCF] hover:border-[#B8924A] transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-sm hover:shadow-md"
               >
                 <div className="space-y-1">
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <PassportSeal size={28} variant="navy" className="shrink-0" />
                     <span className="font-serif font-bold text-base text-[#1B2A4A]">
                       {j.name} ({j.stateOrProvince})
                     </span>

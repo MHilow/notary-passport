@@ -3,6 +3,7 @@ import { NotaryProfile, Credential, AccessGrant } from '../types';
 import { StatusBadge } from '../components/StatusBadge';
 import { calculateCredentialStatus } from '../services/verificationEngine';
 import { PassportSeal } from '../components/PassportSeal';
+import { ScallopedSeal } from '../components/ScallopedSeal';
 import { Search, Building2, CheckCircle2, Eye, Lock, FileText } from 'lucide-react';
 
 interface BusinessLookupViewProps {
@@ -107,18 +108,21 @@ export const BusinessLookupView: React.FC<BusinessLookupViewProps> = ({
       </div>
 
       {/* Search Result Profile Header */}
-      <div className="bg-white border border-[#D8D2C6] p-6 space-y-6">
+      <div className="bg-white border border-[#D8D2C6] p-6 space-y-6 rounded-3xl shadow-sm">
         
         <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4 border-b border-[#D8D2C6] pb-4">
-          <img
-            src={profile.photoUrl}
-            alt={profile.fullName}
-            className="w-16 h-16 object-cover border border-[#1B2A4A]"
-          />
+          <div className="relative shrink-0">
+            <img
+              src={profile.photoUrl}
+              alt={profile.fullName}
+              className="w-16 h-16 object-cover border-2 border-[#1B2A4A] rounded-2xl"
+            />
+            <ScallopedSeal size={28} showAccents={false} className="absolute -bottom-2 -right-2 drop-shadow-md" />
+          </div>
           <div className="flex-1 text-center sm:text-left space-y-1">
             <div className="flex items-center justify-center sm:justify-start gap-3">
               <h2 className="font-serif font-bold text-xl text-[#14181F]">{profile.fullName}</h2>
-              <span className="font-mono text-xs text-[#1B2A4A] bg-[#F6F2E9] px-2 py-0.5 border border-[#1B2A4A]/30">
+              <span className="font-mono text-xs text-[#1B2A4A] bg-[#F6F2E9] px-2 py-0.5 border border-[#1B2A4A]/30 rounded-md">
                 @{profile.handle}
               </span>
             </div>
@@ -217,8 +221,8 @@ export const BusinessLookupView: React.FC<BusinessLookupViewProps> = ({
                 ))}
               </div>
             ) : (
-              <div className="p-8 bg-[#F6F2E9] border border-[#D8D2C6] text-center space-y-3">
-                <Lock className="w-10 h-10 text-[#1B2A4A] mx-auto" />
+              <div className="p-8 bg-[#F6F2E9] border border-[#D8D2C6] text-center space-y-3 rounded-2xl">
+                <PassportSeal size={56} variant="navy" className="mx-auto drop-shadow-sm" />
                 <h3 className="font-serif font-bold text-lg text-[#14181F]">Document Access Permission Required</h3>
                 <p className="text-xs text-[#14181F]/70 max-w-md mx-auto font-sans">
                   {companyName} does not currently have active document viewing permissions for {profile.fullName}.

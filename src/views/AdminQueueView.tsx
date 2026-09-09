@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Credential, NotaryProfile } from '../types';
 import { StatusBadge } from '../components/StatusBadge';
 import { PassportSeal } from '../components/PassportSeal';
+import { ScallopedSeal } from '../components/ScallopedSeal';
 import { CheckSquare, CheckCircle2, XCircle, Eye, FileText, User } from 'lucide-react';
 
 interface AdminQueueViewProps {
@@ -64,13 +65,13 @@ export const AdminQueueView: React.FC<AdminQueueViewProps> = ({
       {/* Pending Reviews Queue */}
       <div className="space-y-4">
         <h2 className="font-serif font-bold text-lg text-[#14181F] flex items-center gap-2 border-b border-[#D8D2C6] pb-2">
-          <CheckSquare className="w-5 h-5 text-[#1B2A4A]" />
+          <PassportSeal size={28} variant="gold" />
           Pending Verification Requests ({pendingCredentials.length})
         </h2>
 
         {pendingCredentials.length === 0 ? (
-          <div className="bg-white border border-[#D8D2C6] p-12 text-center text-[#14181F]/60 text-xs font-mono">
-            <CheckCircle2 className="w-10 h-10 text-[#3F6B4F] mx-auto mb-2" />
+          <div className="bg-white border border-[#D8D2C6] rounded-3xl p-12 text-center text-[#14181F]/60 text-xs font-mono space-y-2">
+            <ScallopedSeal size={60} showAccents={false} className="mx-auto" />
             <div className="font-bold text-[#14181F] text-sm font-serif">REGISTRAR QUEUE CLEAN</div>
             <p className="mt-1 font-sans">All submitted notary credentials have been reviewed and verified.</p>
           </div>
