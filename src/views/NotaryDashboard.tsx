@@ -14,7 +14,9 @@ import {
   Activity, 
   FileCheck,
   Globe,
-  BookOpen
+  BookOpen,
+  Building,
+  ExternalLink
 } from 'lucide-react';
 
 interface NotaryDashboardProps {
@@ -25,6 +27,7 @@ interface NotaryDashboardProps {
   onOpenUpload: () => void;
   onOpenShare: () => void;
   onOpenGrants: () => void;
+  onOpenDirectory: () => void;
   onDeleteCredential: (id: string) => void;
   onViewDocument: (cred: Credential) => void;
 }
@@ -37,6 +40,7 @@ export const NotaryDashboard: React.FC<NotaryDashboardProps> = ({
   onOpenUpload,
   onOpenShare,
   onOpenGrants,
+  onOpenDirectory,
   onDeleteCredential,
   onViewDocument,
 }) => {
@@ -55,63 +59,62 @@ export const NotaryDashboard: React.FC<NotaryDashboardProps> = ({
   return (
     <div className="space-y-8 pb-16">
       
-      {/* Passport Navy Header Banner */}
-      <div className="bg-[#1B2A4A] text-[#F6F2E9] border-2 border-[#B8924A] p-6 sm:p-8 corner-bracket">
+      {/* Welcoming Official Passport Hero Panel */}
+      <div className="official-hero-panel p-6 sm:p-8">
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
           
-          {/* Notary Identity */}
           <div className="flex items-start sm:items-center gap-5">
-            <PassportSeal size={72} variant="gold" />
+            <PassportSeal size={76} variant="gold" />
             <div className="space-y-1">
               <div className="flex items-center gap-3 flex-wrap">
                 <h1 className="font-serif font-bold text-2xl sm:text-3xl text-[#F6F2E9]">
-                  {profile.fullName}
+                  Welcome back, {profile.fullName.split(' ')[0]}
                 </h1>
-                <span className="badge-verified">
-                  PASSPORT ACTIVE
+                <span className="bubbly-pill bubbly-pill-verified">
+                  Passport Active
                 </span>
                 {profile.isRonApproved && (
-                  <span className="badge-expiring">
-                    RON AUTHORIZED
+                  <span className="bubbly-pill bubbly-pill-gold">
+                    <Globe className="w-3.5 h-3.5" /> RON Authorized
                   </span>
                 )}
               </div>
-              <p className="text-xs sm:text-sm text-[#F6F2E9]/80 max-w-xl">{profile.bio}</p>
+              <p className="text-xs sm:text-sm text-[#F6F2E9]/80 font-sans max-w-xl leading-relaxed">{profile.bio}</p>
               
               <div className="flex items-center gap-4 text-xs font-mono text-[#B8924A] pt-1">
-                <span>Jurisdiction: <strong className="text-[#F6F2E9]">{profile.primaryJurisdiction} ({profile.country})</strong></span>
+                <span>Primary State: <strong className="text-[#F6F2E9]">{profile.primaryJurisdiction} ({profile.country})</strong></span>
                 <span>•</span>
-                <span>Passport ID: <strong className="text-[#F6F2E9]">{profile.handle}</strong></span>
+                <span>Passport Handle: <strong className="text-[#F6F2E9]">@{profile.handle}</strong></span>
               </div>
             </div>
           </div>
 
-          {/* Square Action Buttons (Page 6) */}
+          {/* Action Buttons */}
           <div className="flex items-center gap-3 shrink-0 flex-wrap">
             <button
               onClick={onOpenUpload}
-              className="btn-primary"
+              className="px-4 py-2.5 rounded-2xl bg-[#B8924A] hover:bg-[#d4af65] text-[#14181F] font-bold text-xs flex items-center gap-2 border border-[#F6F2E9]/40 shadow-lg transition-all transform hover:-translate-y-0.5"
             >
-              <Upload className="w-4 h-4 text-[#B8924A]" />
-              Upload credential
+              <Upload className="w-4 h-4" />
+              Upload Credential
             </button>
 
             <button
               onClick={onOpenShare}
-              className="btn-secondary"
+              className="px-4 py-2.5 rounded-2xl bg-[#14181F] hover:bg-[#0C1424] text-[#F6F2E9] font-semibold text-xs flex items-center gap-2 border border-[#B8924A]/60 transition-all"
             >
-              <Share2 className="w-4 h-4" />
-              Share credential
+              <Share2 className="w-4 h-4 text-[#B8924A]" />
+              Share Link & QR
             </button>
 
             <button
               onClick={onOpenGrants}
-              className="btn-secondary relative"
+              className="relative px-4 py-2.5 rounded-2xl bg-[#14181F] hover:bg-[#0C1424] text-[#F6F2E9] font-semibold text-xs flex items-center gap-2 border border-[#B8924A]/60 transition-all"
             >
-              <Key className="w-4 h-4" />
-              Access grants ({activeGrants.length})
+              <Key className="w-4 h-4 text-[#B8924A]" />
+              Access Grants ({activeGrants.length})
               {pendingRequests.length > 0 && (
-                <span className="w-4 h-4 bg-[#7A3B34] text-[#F6F2E9] font-mono text-[10px] flex items-center justify-center">
+                <span className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-[#7A3B34] text-[#F6F2E9] font-mono font-bold text-[10px] flex items-center justify-center border border-[#B8924A]">
                   {pendingRequests.length}
                 </span>
               )}
@@ -121,9 +124,35 @@ export const NotaryDashboard: React.FC<NotaryDashboardProps> = ({
         </div>
       </div>
 
-      {/* Voice Compliant Warning Banner (Page 7) */}
+      {/* Prominent State Registry Direct Verification Callout Banner */}
+      <div className="p-4 rounded-2xl bg-[#FFFFFF] border-2 border-[#B8924A] shadow-md flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 rounded-2xl bg-[#1B2A4A] text-[#B8924A] flex items-center justify-center shrink-0 border border-[#B8924A]/40">
+            <Building className="w-5 h-5" />
+          </div>
+          <div>
+            <h4 className="font-serif font-bold text-sm text-[#1B2A4A] flex items-center gap-2">
+              Official State & Provincial Verification Registries
+            </h4>
+            <p className="text-xs text-[#14181F]/70 font-sans mt-0.5">
+              Title companies and clients can independently verify your notary commission directly on state government servers in 1 click.
+            </p>
+          </div>
+        </div>
+
+        <button
+          onClick={onOpenDirectory}
+          className="verify-state-btn px-4 py-2 text-xs shrink-0 justify-center"
+        >
+          <Building className="w-4 h-4 text-[#B8924A]" />
+          Browse State Directory 🏛️
+          <ExternalLink className="w-3.5 h-3.5" />
+        </button>
+      </div>
+
+      {/* Renewal Alert Notice */}
       {(expiringCount > 0 || expiredCount > 0) && (
-        <div className="p-4 bg-[#7A3B34]/10 border-l-4 border-l-[#7A3B34] border border-[#7A3B34]/30 text-[#14181F] flex items-start justify-between gap-4">
+        <div className="p-4 rounded-2xl bg-[#7A3B34]/10 border-l-4 border-l-[#7A3B34] border border-[#7A3B34]/30 text-[#14181F] flex items-start justify-between gap-4">
           <div className="flex items-start gap-3">
             <AlertTriangle className="w-5 h-5 text-[#7A3B34] shrink-0 mt-0.5" />
             <div>
@@ -135,72 +164,72 @@ export const NotaryDashboard: React.FC<NotaryDashboardProps> = ({
           </div>
           <button
             onClick={onOpenUpload}
-            className="btn-primary px-3 py-1 text-xs shrink-0 bg-[#7A3B34] border-[#7A3B34]"
+            className="px-4 py-2 rounded-2xl bg-[#7A3B34] hover:bg-[#7A3B34]/90 text-[#F6F2E9] font-bold text-xs shrink-0 shadow-md"
           >
-            Upload renewal
+            Upload Renewal
           </button>
         </div>
       )}
 
-      {/* Overview Stat Blocks */}
+      {/* Stats Summary Grid */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <div className="bg-white border border-[#D8D2C6] p-4 flex items-center gap-3">
-          <div className="p-2.5 bg-[#3F6B4F]/10 text-[#3F6B4F] border border-[#3F6B4F]">
+        <div className="bg-white border border-[#E2DBCF] rounded-2xl p-4 flex items-center gap-3 shadow-sm">
+          <div className="p-3 rounded-2xl bg-[#3F6B4F]/10 text-[#3F6B4F] border border-[#3F6B4F]">
             <CheckCircle2 className="w-5 h-5" />
           </div>
           <div>
             <span className="font-serif font-bold text-2xl text-[#14181F]">{verifiedCount}</span>
-            <span className="text-xs text-[#14181F]/60 font-mono block uppercase">Verified</span>
+            <span className="text-xs text-[#14181F]/60 font-mono block uppercase">Verified Credentials</span>
           </div>
         </div>
 
-        <div className="bg-white border border-[#D8D2C6] p-4 flex items-center gap-3">
-          <div className="p-2.5 bg-[#B8924A]/10 text-[#B8924A] border border-[#B8924A]">
+        <div className="bg-white border border-[#E2DBCF] rounded-2xl p-4 flex items-center gap-3 shadow-sm">
+          <div className="p-3 rounded-2xl bg-[#B8924A]/10 text-[#B8924A] border border-[#B8924A]">
             <AlertTriangle className="w-5 h-5" />
           </div>
           <div>
             <span className="font-serif font-bold text-2xl text-[#14181F]">{expiringCount}</span>
-            <span className="text-xs text-[#14181F]/60 font-mono block uppercase">Expiring soon</span>
+            <span className="text-xs text-[#14181F]/60 font-mono block uppercase">Expiring Soon</span>
           </div>
         </div>
 
-        <div className="bg-white border border-[#D8D2C6] p-4 flex items-center gap-3">
-          <div className="p-2.5 bg-[#1B2A4A]/10 text-[#1B2A4A] border border-[#1B2A4A]">
+        <div className="bg-white border border-[#E2DBCF] rounded-2xl p-4 flex items-center gap-3 shadow-sm">
+          <div className="p-3 rounded-2xl bg-[#1B2A4A]/10 text-[#1B2A4A] border border-[#1B2A4A]">
             <FileCheck className="w-5 h-5" />
           </div>
           <div>
             <span className="font-serif font-bold text-2xl text-[#14181F]">{pendingCount}</span>
-            <span className="text-xs text-[#14181F]/60 font-mono block uppercase">Pending review</span>
+            <span className="text-xs text-[#14181F]/60 font-mono block uppercase">Pending Review</span>
           </div>
         </div>
 
-        <div className="bg-white border border-[#D8D2C6] p-4 flex items-center gap-3">
-          <div className="p-2.5 bg-[#14181F]/10 text-[#14181F] border border-[#14181F]">
+        <div className="bg-white border border-[#E2DBCF] rounded-2xl p-4 flex items-center gap-3 shadow-sm">
+          <div className="p-3 rounded-2xl bg-[#14181F]/10 text-[#14181F] border border-[#14181F]">
             <Building2 className="w-5 h-5" />
           </div>
           <div>
             <span className="font-serif font-bold text-2xl text-[#14181F]">{activeGrants.length}</span>
-            <span className="text-xs text-[#14181F]/60 font-mono block uppercase">Access grants</span>
+            <span className="text-xs text-[#14181F]/60 font-mono block uppercase">Active Grants</span>
           </div>
         </div>
       </div>
 
-      {/* Main Content Layout */}
+      {/* Main Vault Content */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         
-        {/* Left 2 Columns: Credentials Ledger Cards */}
+        {/* Left 2 Columns: Credentials Cards */}
         <div className="lg:col-span-2 space-y-6">
-          <div className="flex items-center justify-between border-b border-[#D8D2C6] pb-2">
+          <div className="flex items-center justify-between border-b border-[#E2DBCF] pb-3">
             <div className="flex items-center gap-2">
               <BookOpen className="w-5 h-5 text-[#1B2A4A]" />
-              <h2 className="font-serif font-bold text-xl text-[#14181F]">Credential Ledger</h2>
-              <span className="font-mono text-xs text-[#14181F]/60">({credentials.length} total)</span>
+              <h2 className="font-serif font-bold text-xl text-[#14181F]">Credential Vault</h2>
+              <span className="font-mono text-xs text-[#14181F]/60">({credentials.length} Recorded)</span>
             </div>
             <button
               onClick={onOpenUpload}
-              className="text-xs font-semibold text-[#1B2A4A] hover:underline"
+              className="text-xs font-bold text-[#1B2A4A] hover:underline"
             >
-              + Upload document
+              + Add New Document
             </button>
           </div>
 
@@ -216,18 +245,18 @@ export const NotaryDashboard: React.FC<NotaryDashboardProps> = ({
           </div>
         </div>
 
-        {/* Right 1 Column: Jurisdiction Criteria & Audit Trail */}
+        {/* Right 1 Column: Jurisdiction Rules Compliance Engine */}
         <div className="space-y-6">
           
-          <div className="bg-white border border-[#D8D2C6] p-5 shadow-sm">
-            <div className="flex items-center justify-between mb-4 border-b border-[#D8D2C6] pb-2">
+          <div className="bg-white border-2 border-[#B8924A] rounded-3xl p-6 shadow-md space-y-4">
+            <div className="flex items-center justify-between border-b border-[#E2DBCF] pb-3">
               <h3 className="font-serif font-bold text-base text-[#14181F]">
-                Jurisdiction Requirements
+                Jurisdiction Compliance Engine
               </h3>
               <select
                 value={selectedJurisdictionCode}
                 onChange={(e) => setSelectedJurisdictionCode(e.target.value)}
-                className="bg-[#F6F2E9] border border-[#D8D2C6] text-xs px-2 py-1 text-[#14181F] font-mono"
+                className="bg-[#F6F2E9] border border-[#E2DBCF] rounded-xl text-xs px-2.5 py-1 text-[#14181F] font-mono"
               >
                 <option value="TX">Texas (US)</option>
                 <option value="CA">California (US)</option>
@@ -240,7 +269,7 @@ export const NotaryDashboard: React.FC<NotaryDashboardProps> = ({
               </select>
             </div>
 
-            <div className="p-3 bg-[#F6F2E9] border border-[#D8D2C6] text-xs mb-4">
+            <div className="p-3 bg-[#F6F2E9] rounded-2xl border border-[#E2DBCF] text-xs">
               <div className="flex items-center justify-between font-mono font-bold text-[#14181F] mb-1">
                 <span>{currentJurisdiction.name} ({currentJurisdiction.country}) Rules</span>
                 <span className={audit.isFullyCompliant ? 'text-[#3F6B4F]' : 'text-[#B8924A]'}>
@@ -252,12 +281,12 @@ export const NotaryDashboard: React.FC<NotaryDashboardProps> = ({
 
             {/* Checklist */}
             <div className="space-y-2 text-xs font-mono">
-              <div className="flex items-center justify-between p-2 bg-[#F6F2E9]">
+              <div className="flex items-center justify-between p-2.5 rounded-xl bg-[#F6F2E9]">
                 <span>Commission Term ({currentJurisdiction.commissionTermYears} Yrs)</span>
                 <CheckCircle2 className="w-4 h-4 text-[#3F6B4F]" />
               </div>
 
-              <div className="flex items-center justify-between p-2 bg-[#F6F2E9]">
+              <div className="flex items-center justify-between p-2.5 rounded-xl bg-[#F6F2E9]">
                 <span>E&O Min (${(currentJurisdiction.minInsuranceAmount || 0).toLocaleString()})</span>
                 {credentials.some(c => c.type === 'insurance' && c.status !== 'expired') ? (
                   <CheckCircle2 className="w-4 h-4 text-[#3F6B4F]" />
@@ -267,14 +296,14 @@ export const NotaryDashboard: React.FC<NotaryDashboardProps> = ({
               </div>
 
               {currentJurisdiction.requiresBond && (
-                <div className="flex items-center justify-between p-2 bg-[#F6F2E9]">
+                <div className="flex items-center justify-between p-2.5 rounded-xl bg-[#F6F2E9]">
                   <span>State Bond (${(currentJurisdiction.bondAmountUsdOrCad || 0).toLocaleString()})</span>
                   <CheckCircle2 className="w-4 h-4 text-[#3F6B4F]" />
                 </div>
               )}
 
               {currentJurisdiction.requiresBackgroundCheck && (
-                <div className="flex items-center justify-between p-2 bg-[#F6F2E9]">
+                <div className="flex items-center justify-between p-2.5 rounded-xl bg-[#F6F2E9]">
                   <span>Annual Screening</span>
                   {credentials.some(c => c.type === 'background_check' && c.status === 'verified') ? (
                     <CheckCircle2 className="w-4 h-4 text-[#3F6B4F]" />
@@ -287,14 +316,14 @@ export const NotaryDashboard: React.FC<NotaryDashboardProps> = ({
           </div>
 
           {/* Audit Log */}
-          <div className="bg-white border border-[#D8D2C6] p-5 shadow-sm">
-            <h3 className="font-serif font-bold text-base text-[#14181F] mb-3 border-b border-[#D8D2C6] pb-2">
-              Verification Audit Log
+          <div className="bg-white border border-[#E2DBCF] rounded-3xl p-6 shadow-sm">
+            <h3 className="font-serif font-bold text-base text-[#14181F] mb-3 border-b border-[#E2DBCF] pb-2">
+              Verification Audit Trail
             </h3>
 
             <div className="space-y-3 max-h-56 overflow-y-auto custom-scrollbar text-xs font-mono">
               {logs.map((log) => (
-                <div key={log.id} className="pb-2 border-b border-[#D8D2C6] last:border-0">
+                <div key={log.id} className="pb-2 border-b border-[#E2DBCF] last:border-0">
                   <div className="flex items-center justify-between text-[#14181F] font-bold">
                     <span>{log.actorName}</span>
                     <span className="text-[10px] text-[#14181F]/60">{new Date(log.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>

@@ -8,11 +8,12 @@ import { AdminQueueView } from './views/AdminQueueView';
 import { UploadModal } from './components/UploadModal';
 import { AccessGrantModal } from './components/AccessGrantModal';
 import { ShareLinkModal } from './components/ShareLinkModal';
+import { JurisdictionDirectoryModal } from './components/JurisdictionDirectoryModal';
 import { PassportSeal } from './components/PassportSeal';
 import { Credential } from './types';
 import { StatusBadge } from './components/StatusBadge';
 import { calculateCredentialStatus } from './services/verificationEngine';
-import { X, Download, ShieldCheck, FileText } from 'lucide-react';
+import { X, Download, ShieldCheck, FileText, ExternalLink, Building } from 'lucide-react';
 
 export function App() {
   const [mode, setMode] = useState<AppMode>('notary_dashboard');
@@ -25,6 +26,7 @@ export function App() {
   const [isUploadOpen, setIsUploadOpen] = useState(false);
   const [isShareOpen, setIsShareOpen] = useState(false);
   const [isGrantsOpen, setIsGrantsOpen] = useState(false);
+  const [isDirectoryOpen, setIsDirectoryOpen] = useState(false);
   const [viewingDocument, setViewingDocument] = useState<Credential | null>(null);
 
   // Subscribe to storage changes
@@ -48,6 +50,7 @@ export function App() {
         currentMode={mode}
         onModeChange={setMode}
         pendingCount={pendingCount}
+        onOpenDirectory={() => setIsDirectoryOpen(true)}
       />
 
       {/* Main View Container */}
@@ -62,6 +65,7 @@ export function App() {
             onOpenUpload={() => setIsUploadOpen(true)}
             onOpenShare={() => setIsShareOpen(true)}
             onOpenGrants={() => setIsGrantsOpen(true)}
+            onOpenDirectory={() => setIsDirectoryOpen(true)}
             onDeleteCredential={(id) => storage.deleteCredential(id)}
             onViewDocument={(cred) => setViewingDocument(cred)}
           />
@@ -105,14 +109,20 @@ export function App() {
       </main>
 
       {/* Official Footer */}
-      <footer className="border-t border-[#D8D2C6] bg-[#F6F2E9] py-6 text-center text-xs font-mono text-[#14181F]/70">
+      <footer className="border-t border-[#E2DBCF] bg-[#FFFFFF] py-6 text-center text-xs font-mono text-[#14181F]/70">
         <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3">
           <div className="flex items-center gap-2">
             <PassportSeal size={28} variant="navy" />
             <span className="font-serif font-bold text-[#1B2A4A]">NOTARY PASSPORT</span>
             <span>— VERIFIED ONCE, TRUSTED EVERYWHERE</span>
           </div>
-          <p>A portable credential for notaries across the U.S. and Canada</p>
+          <button
+            onClick={() => setIsDirectoryOpen(true)}
+            className="verify-state-btn text-[11px] py-1 px-3"
+          >
+            <Building className="w-3.5 h-3.5 text-[#B8924A]" />
+            View Official Government Directory 🏛️
+          </button>
         </div>
       </footer>
 
@@ -138,19 +148,24 @@ export function App() {
         onApproveRequest={(id) => storage.approveAccessRequest(id)}
       />
 
+      <JurisdictionDirectoryModal
+        isOpen={isDirectoryOpen}
+        onClose={() => setIsDirectoryOpen(false)}
+      />
+
       {/* Document Inspector Modal */}
       {viewingDocument && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#14181F]/70 backdrop-blur-xs">
-          <div className="bg-[#1B2A4A] text-[#F6F2E9] w-full max-w-2xl border-2 border-[#B8924A] p-6 corner-bracket shadow-2xl space-y-4">
+          <div className="bg-[#FFFFFF] text-[#14181F] w-full max-w-2xl rounded-3xl border-2 border-[#B8924A] p-6 shadow-2xl space-y-4">
             
-            <div className="flex items-center justify-between pb-3 border-b border-[#B8924A]/40">
+            <div className="flex items-center justify-between pb-3 border-b border-[#E2DBCF]">
               <div className="flex items-center gap-3">
-                <div className="p-2 bg-[#14181F] text-[#B8924A] border border-[#B8924A]">
+                <div className="w-10 h-10 rounded-2xl bg-[#1B2A4A] text-[#B8924A] flex items-center justify-center border border-[#B8924A]/40">
                   <FileText className="w-5 h-5" />
                 </div>
                 <div>
-                  <h3 className="font-serif font-bold text-lg text-[#F6F2E9]">{viewingDocument.title}</h3>
-                  <p className="text-xs font-mono text-[#B8924A]">{viewingDocument.fileName} ({viewingDocument.fileSize})</p>
+                  <h3 className="font-serif font-bold text-lg text-[#1B2A4A]">{viewingDocument.title}</h3>
+                  <p className="text-xs font-mono text-[#14181F]/60">{viewingDocument.fileName} ({viewingDocument.fileSize})</p>
                 </div>
               </div>
 
@@ -158,20 +173,20 @@ export function App() {
                 <StatusBadge status={calculateCredentialStatus(viewingDocument)} />
                 <button
                   onClick={() => setViewingDocument(null)}
-                  className="p-1 text-[#F6F2E9]/60 hover:text-[#F6F2E9]"
+                  className="w-8 h-8 rounded-full bg-[#F6F2E9] hover:bg-[#E2DBCF] text-[#14181F] flex items-center justify-center"
                 >
-                  <X className="w-5 h-5" />
+                  <X className="w-4 h-4" />
                 </button>
               </div>
             </div>
 
-            {/* Document Preview Box on Paper Cream Surface */}
-            <div className="h-80 bg-[#F6F2E9] border-2 border-[#B8924A] p-6 flex flex-col items-center justify-center text-center relative overflow-hidden">
-              <div className="w-full max-w-md p-6 bg-[#F6F2E9] border border-[#1B2A4A] space-y-4 text-xs font-mono text-[#14181F]">
-                <div className="flex items-center justify-between border-b border-[#D8D2C6] pb-3">
+            {/* Document Preview Box */}
+            <div className="h-80 rounded-2xl bg-[#F6F2E9] border-2 border-[#E2DBCF] p-6 flex flex-col items-center justify-center text-center relative overflow-hidden">
+              <div className="w-full max-w-md p-6 bg-[#FFFFFF] border border-[#E2DBCF] rounded-2xl space-y-4 text-xs font-mono text-[#14181F] shadow-md">
+                <div className="flex items-center justify-between border-b border-[#E2DBCF] pb-3">
                   <div className="font-serif font-bold text-sm text-[#1B2A4A] flex items-center gap-2 uppercase">
                     <ShieldCheck className="w-4 h-4 text-[#3F6B4F]" />
-                    Official Document Record
+                    Official Government Record
                   </div>
                   <span className="font-mono text-[10px] text-[#14181F]/60">{viewingDocument.id}</span>
                 </div>
@@ -195,22 +210,28 @@ export function App() {
                   </div>
                 </div>
 
-                <div className="badge-verified w-full text-center py-1.5">
-                  OFFICIAL ENCRYPTED RECORD · VERIFIED
-                </div>
+                <a
+                  href={viewingDocument.metadata?.sourceRegistryUrl || 'https://direct.sos.state.tx.us/notary/search.asp'}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="verify-state-btn justify-center w-full py-2"
+                >
+                  <ShieldCheck className="w-4 h-4 text-[#B8924A]" />
+                  Verify directly at {viewingDocument.metadata?.issuingAuthority || 'State SOS Registry'} ↗
+                </a>
               </div>
             </div>
 
             <div className="flex items-center justify-between pt-2 font-mono text-xs">
-              <span className="text-[#F6F2E9]/70">
+              <span className="text-[#14181F]/70">
                 Uploaded: {new Date(viewingDocument.uploadedAt).toLocaleDateString()}
               </span>
               <button
                 onClick={() => alert(`Simulated Download: ${viewingDocument.fileName}`)}
-                className="btn-primary"
+                className="px-4 py-2 rounded-2xl bg-[#1B2A4A] text-[#F6F2E9] font-bold text-xs flex items-center gap-1.5 shadow-md"
               >
                 <Download className="w-4 h-4 text-[#B8924A]" />
-                Download document
+                Download PDF
               </button>
             </div>
 
