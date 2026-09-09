@@ -54,7 +54,7 @@ export const CredentialCard: React.FC<CredentialCardProps> = ({
               ? `Policy #${credential.metadata.policyNumber}`
               : credential.metadata?.commissionNumber
               ? `Commission #${credential.metadata.commissionNumber}`
-              : credential.fileName}
+              : 'Verified Official Record'}
           </p>
         </div>
 

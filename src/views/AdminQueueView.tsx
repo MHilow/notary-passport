@@ -100,8 +100,8 @@ export const AdminQueueView: React.FC<AdminQueueViewProps> = ({
               {/* Info Grid */}
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 p-3 bg-[#F6F2E9] border border-[#D8D2C6] text-xs font-mono text-[#14181F]">
                 <div>
-                  <span className="text-[#14181F]/60 block text-[10px] uppercase">File Name</span>
-                  <span className="font-bold break-all block">{cred.fileName}</span>
+                  <span className="text-[#14181F]/60 block text-[10px] uppercase">Record Type</span>
+                  <span className="font-bold block text-[#1B2A4A]">Official PDF Document</span>
                 </div>
                 <div>
                   <span className="text-[#14181F]/60 block text-[10px] uppercase">Issue Date</span>

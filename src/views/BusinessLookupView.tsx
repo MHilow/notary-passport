@@ -208,7 +208,7 @@ export const BusinessLookupView: React.FC<BusinessLookupViewProps> = ({
                   <div key={cred.id} className="ledger-card bg-[#F6F2E9] p-4 flex items-center justify-between text-xs">
                     <div>
                       <div className="font-serif font-bold text-[#14181F] text-sm">{cred.title}</div>
-                      <div className="text-[11px] font-mono text-[#14181F]/70">{cred.fileName} ({cred.fileSize})</div>
+                      <div className="text-[11px] font-mono text-[#14181F]/70">Official Document Record ({cred.fileSize})</div>
                     </div>
                     <button
                       onClick={() => onViewDocument(cred)}
