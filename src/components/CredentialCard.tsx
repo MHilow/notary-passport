@@ -25,18 +25,18 @@ export const CredentialCard: React.FC<CredentialCardProps> = ({
   const stateName = jurisdiction?.name || credential.jurisdictionCode || 'State';
 
   return (
-    <div className="bubbly-card flex flex-col justify-between relative overflow-hidden">
+    <div className="bubbly-card flex flex-col justify-between relative overflow-hidden space-y-4">
       
       {/* Top Header */}
-      <div>
-        <div className="flex items-start justify-between gap-3 mb-2">
-          <div className="flex items-start gap-2.5">
-            <PassportSeal size={36} variant="navy" className="shrink-0 mt-0.5 opacity-90" />
-            <div>
-              <h3 className="font-serif font-bold text-base text-[#1B2A4A] leading-snug">
+      <div className="space-y-3">
+        <div className="flex items-start justify-between gap-3">
+          <div className="flex items-start gap-2.5 min-w-0 flex-1">
+            <PassportSeal size={32} variant="navy" className="shrink-0 mt-0.5 opacity-90" />
+            <div className="min-w-0 flex-1">
+              <h3 className="font-serif font-bold text-base text-[#1B2A4A] leading-snug break-words">
                 {credential.title}
               </h3>
-              <p className="text-xs text-[#14181F]/70 font-mono mt-0.5">
+              <p className="text-xs text-[#14181F]/70 font-mono mt-0.5 truncate">
                 {credential.metadata?.policyNumber
                   ? `Policy #${credential.metadata.policyNumber}`
                   : credential.metadata?.commissionNumber
@@ -46,40 +46,45 @@ export const CredentialCard: React.FC<CredentialCardProps> = ({
               </p>
             </div>
           </div>
-          <StatusBadge status={currentStatus} />
+
+          <div className="shrink-0">
+            <StatusBadge status={currentStatus} />
+          </div>
         </div>
 
         {/* Issuing Authority & Prominent 1-Click State Verification Button */}
-        <div className="my-3 p-3 rounded-xl bg-[#F6F2E9] border border-[#E2DBCF] flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs">
-          <div>
-            <span className="text-[#14181F]/60 block text-[10px] uppercase font-mono">Verified Authority</span>
-            <span className="font-bold text-[#14181F] flex items-center gap-1.5 mt-0.5">
-              <ShieldCheck className="w-4 h-4 text-[#3F6B4F]" />
-              {credential.metadata?.issuingAuthority || `${stateName} SOS Office`}
+        <div className="p-3.5 rounded-2xl bg-[#F6F2E9] border border-[#E2DBCF] space-y-2.5 text-xs">
+          <div className="flex items-center justify-between">
+            <span className="text-[#14181F]/60 block text-[10px] uppercase font-mono font-bold">Verified Authority</span>
+            <span className="font-bold text-[#3F6B4F] flex items-center gap-1 text-[10px] font-mono">
+              <ShieldCheck className="w-3.5 h-3.5 text-[#3F6B4F]" /> Government Server
             </span>
+          </div>
+
+          <div className="font-bold text-[#14181F] text-xs">
+            {credential.metadata?.issuingAuthority || `${stateName} SOS Office`}
           </div>
 
           <a
             href={registryUrl}
             target="_blank"
             rel="noreferrer"
-            className="verify-state-btn shrink-0 justify-center"
+            className="verify-state-btn w-full justify-center py-2 text-xs font-bold text-center mt-1"
             title={`Verify directly on official ${stateName} government database`}
           >
             <ShieldCheck className="w-3.5 h-3.5 text-[#B8924A]" />
-            Verify at {stateName} Registry
-            <ExternalLink className="w-3 h-3" />
+            Verify at {stateName} Registry ↗
           </a>
         </div>
 
         {/* Metadata Details */}
-        <div className="grid grid-cols-2 gap-2 text-xs font-mono text-[#14181F]/80 mb-2">
+        <div className="grid grid-cols-2 gap-2 text-xs font-mono text-[#14181F]/80 p-2.5 rounded-xl bg-[#F6F2E9]/60 border border-[#E2DBCF]/60">
           <div>
-            <span className="text-[#14181F]/50 block text-[10px] uppercase">Issued Date</span>
+            <span className="text-[#14181F]/50 block text-[10px] uppercase font-semibold">Issued Date</span>
             <span className="font-bold">{credential.issueDate}</span>
           </div>
           <div>
-            <span className="text-[#14181F]/50 block text-[10px] uppercase">Expiration Date</span>
+            <span className="text-[#14181F]/50 block text-[10px] uppercase font-semibold">Expiration Date</span>
             <span className="font-bold">
               {credential.expiryDate
                 ? new Date(credential.expiryDate).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })
@@ -90,7 +95,7 @@ export const CredentialCard: React.FC<CredentialCardProps> = ({
 
         {/* Rejection Note if any */}
         {credential.status === 'rejected' && credential.rejectionReason && (
-          <div className="mt-2 p-2.5 rounded-xl bg-[#7A3B34]/10 border border-[#7A3B34]/30 text-[#7A3B34] text-xs">
+          <div className="p-2.5 rounded-xl bg-[#7A3B34]/10 border border-[#7A3B34]/30 text-[#7A3B34] text-xs">
             <strong>Rejection Note:</strong> {credential.rejectionReason}
           </div>
         )}
@@ -98,12 +103,12 @@ export const CredentialCard: React.FC<CredentialCardProps> = ({
 
       {/* Footer Actions */}
       {showActions && (
-        <div className="flex items-center justify-between pt-3 border-t border-[#E2DBCF] mt-2">
-          <span className="text-[11px] font-mono text-[#3F6B4F] font-bold">
+        <div className="flex items-center justify-between pt-3 border-t border-[#E2DBCF]">
+          <span className="text-[11px] font-mono text-[#3F6B4F] font-bold truncate">
             ✓ Certified by {credential.verifiedBy || 'Registrar API'}
           </span>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 shrink-0">
             {onViewDocument && (
               <button
                 onClick={() => onViewDocument(credential)}
