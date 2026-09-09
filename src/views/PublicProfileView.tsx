@@ -53,7 +53,7 @@ export const PublicProfileView: React.FC<PublicProfileViewProps> = ({
       <div className="bg-[#1B2A4A] text-[#F6F2E9] border-2 border-[#B8924A] p-6 sm:p-8 corner-bracket space-y-6">
         
         <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6 border-b border-[#B8924A]/40 pb-6">
-          <ScallopedSeal size={84} />
+          <ScallopedSeal size={104} />
           <div className="text-center sm:text-left space-y-1">
             <div className="flex items-center justify-center sm:justify-start gap-3 flex-wrap">
               <h1 className="font-serif font-bold text-2xl sm:text-3xl text-[#F6F2E9]">{profile.fullName}</h1>

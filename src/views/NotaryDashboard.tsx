@@ -64,8 +64,8 @@ export const NotaryDashboard: React.FC<NotaryDashboardProps> = ({
       <div className="official-hero-panel p-6 sm:p-8">
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
           
-          <div className="flex items-start sm:items-center gap-5">
-            <ScallopedSeal size={84} />
+          <div className="flex items-start sm:items-center gap-6">
+            <ScallopedSeal size={104} />
             <div className="space-y-1">
               <div className="flex items-center gap-3 flex-wrap">
                 <h1 className="font-serif font-bold text-2xl sm:text-3xl text-[#F6F2E9]">
