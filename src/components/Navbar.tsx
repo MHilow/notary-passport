@@ -1,7 +1,7 @@
 import React from 'react';
 import { User, Share2, Building2, CheckSquare, RotateCcw, Building } from 'lucide-react';
 import { storage } from '../services/storageService';
-import { PassportSeal } from './PassportSeal';
+import { ScallopedSeal } from './ScallopedSeal';
 
 export type AppMode = 'notary_dashboard' | 'public_profile' | 'business_lookup' | 'admin_queue';
 
@@ -18,9 +18,9 @@ export const Navbar: React.FC<NavbarProps> = ({ currentMode, onModeChange, pendi
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           
-          {/* Logo with Seal */}
+          {/* Logo with Scalloped Seal Badge (Logo Form 1) */}
           <div className="flex items-center gap-3 cursor-pointer" onClick={() => onModeChange('notary_dashboard')}>
-            <PassportSeal size={48} variant="gold" />
+            <ScallopedSeal size={52} />
             <div>
               <div className="flex items-center gap-2">
                 <span className="font-serif font-bold text-xl tracking-tight text-[#F6F2E9]">
@@ -30,7 +30,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentMode, onModeChange, pendi
                   Official Wallet
                 </span>
               </div>
-              <p className="text-xs text-[#F6F2E9]/70 hidden sm:block">A portable credential for notaries across the U.S. and Canada</p>
+              <p className="text-xs text-[#F6F2E9]/70 hidden sm:block">Verified once, trusted everywhere</p>
             </div>
           </div>
 

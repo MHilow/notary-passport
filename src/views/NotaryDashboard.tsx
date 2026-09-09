@@ -4,6 +4,7 @@ import { CredentialCard } from '../components/CredentialCard';
 import { auditJurisdictionCompliance } from '../services/verificationEngine';
 import { getJurisdiction } from '../data/jurisdictions';
 import { PassportSeal } from '../components/PassportSeal';
+import { ScallopedSeal } from '../components/ScallopedSeal';
 import { 
   Upload, 
   Share2, 
@@ -64,7 +65,7 @@ export const NotaryDashboard: React.FC<NotaryDashboardProps> = ({
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
           
           <div className="flex items-start sm:items-center gap-5">
-            <PassportSeal size={76} variant="gold" />
+            <ScallopedSeal size={84} />
             <div className="space-y-1">
               <div className="flex items-center gap-3 flex-wrap">
                 <h1 className="font-serif font-bold text-2xl sm:text-3xl text-[#F6F2E9]">

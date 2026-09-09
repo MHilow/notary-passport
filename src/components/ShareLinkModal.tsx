@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { X, Copy, Check, ShieldCheck } from 'lucide-react';
-import { PassportSeal } from './PassportSeal';
+import { ScallopedSeal } from './ScallopedSeal';
 
 interface ShareLinkModalProps {
   isOpen: boolean;
@@ -27,7 +27,7 @@ export const ShareLinkModal: React.FC<ShareLinkModalProps> = ({ isOpen, onClose,
         {/* Header */}
         <div className="flex items-center justify-between pb-4 border-b border-[#B8924A]/40">
           <div className="flex items-center gap-3">
-            <PassportSeal size={48} variant="gold" />
+            <ScallopedSeal size={48} showAccents={false} />
             <div>
               <h2 className="font-serif font-bold text-xl text-[#F6F2E9]">Public Verification Link</h2>
               <p className="text-xs font-mono text-[#B8924A]">Zero-Knowledge Share URL</p>
