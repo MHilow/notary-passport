@@ -4,7 +4,7 @@ import { StatusBadge } from './StatusBadge';
 import { calculateCredentialStatus } from '../services/verificationEngine';
 import { getJurisdiction } from '../data/jurisdictions';
 import { PassportSeal } from './PassportSeal';
-import { Eye, ExternalLink, ShieldCheck, Trash2 } from 'lucide-react';
+import { Eye, ExternalLink, ShieldCheck, Trash2, Award, UserCheck, BadgeCheck, Globe, FileBadge } from 'lucide-react';
 
 interface CredentialCardProps {
   credential: Credential;
@@ -12,6 +12,24 @@ interface CredentialCardProps {
   onDelete?: (id: string) => void;
   showActions?: boolean;
 }
+
+const getTypeBadgeDetails = (type: string) => {
+  switch (type) {
+    case 'commission':
+      return { Icon: Award, color: 'text-[#1B2A4A]', bg: 'bg-[#1B2A4A]/10 border-[#1B2A4A]/25', label: 'Commission' };
+    case 'insurance':
+      return { Icon: ShieldCheck, color: 'text-[#3F6B4F]', bg: 'bg-[#3F6B4F]/10 border-[#3F6B4F]/25', label: 'E&O Insurance' };
+    case 'background_check':
+      return { Icon: UserCheck, color: 'text-[#B8924A]', bg: 'bg-[#B8924A]/15 border-[#B8924A]/30', label: 'Screening' };
+    case 'id':
+      return { Icon: BadgeCheck, color: 'text-[#1B2A4A]', bg: 'bg-[#1B2A4A]/10 border-[#1B2A4A]/25', label: 'State ID' };
+    case 'bond':
+      return { Icon: FileBadge, color: 'text-[#7A3B34]', bg: 'bg-[#7A3B34]/10 border-[#7A3B34]/25', label: 'State Bond' };
+    case 'specialty':
+    default:
+      return { Icon: Globe, color: 'text-[#1B2A4A]', bg: 'bg-[#1B2A4A]/10 border-[#1B2A4A]/25', label: 'Specialty' };
+  }
+};
 
 export const CredentialCard: React.FC<CredentialCardProps> = ({
   credential,
@@ -23,16 +41,23 @@ export const CredentialCard: React.FC<CredentialCardProps> = ({
   const jurisdiction = getJurisdiction(credential.jurisdictionCode || 'TX');
   const registryUrl = credential.metadata?.sourceRegistryUrl || jurisdiction?.officialRegistryUrl || 'https://direct.sos.state.tx.us/notary/search.asp';
   const stateName = jurisdiction?.name || credential.jurisdictionCode || 'State';
+  const typeBadge = getTypeBadgeDetails(credential.type);
+  const TypeIcon = typeBadge.Icon;
 
   return (
     <div className="bubbly-card flex flex-col justify-between relative overflow-hidden space-y-4">
       
       {/* Top Header */}
       <div className="space-y-3">
-        {/* Seal and Status Badge Bar */}
+        {/* Document Type Icon and Status Badge Bar */}
         <div className="flex items-center justify-between gap-3">
           <div className="flex items-center gap-2">
-            <PassportSeal size={28} variant="navy" className="shrink-0 opacity-90" />
+            <div
+              className={`p-2 rounded-xl border ${typeBadge.bg} shrink-0 flex items-center justify-center`}
+              title={`${typeBadge.label} Record`}
+            >
+              <TypeIcon className={`w-4 h-4 ${typeBadge.color}`} />
+            </div>
             {credential.jurisdictionCode && (
               <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-[#1B2A4A] bg-[#F6F2E9] border border-[#1B2A4A]/20 px-2 py-0.5 rounded-md">
                 {credential.jurisdictionCode} Jurisdiction
