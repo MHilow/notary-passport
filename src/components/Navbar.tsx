@@ -14,23 +14,23 @@ interface NavbarProps {
 
 export const Navbar: React.FC<NavbarProps> = ({ currentMode, onModeChange, pendingCount, onOpenDirectory }) => {
   return (
-    <header className="bg-[#1B2A4A] text-[#F6F2E9] border-b-2 border-[#B8924A] shadow-lg sticky top-0 z-40">
+    <header className="bg-[#1B2A4A] text-[#F6F2E9] border-b-2 border-[#B8924A] shadow-md sticky top-0 z-40">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-24 sm:h-28">
+        <div className="flex items-center justify-between h-20 sm:h-24">
           
-          {/* Logo with Prominent Scalloped Seal (Size 80px) */}
-          <div className="flex items-center gap-4 cursor-pointer group" onClick={() => onModeChange('notary_dashboard')}>
-            <ScallopedSeal size={80} className="transform group-hover:scale-105 transition-transform drop-shadow-md" />
+          {/* Logo with Prominent Scalloped Seal (Size 72px) */}
+          <div className="flex items-center gap-3.5 cursor-pointer group" onClick={() => onModeChange('notary_dashboard')}>
+            <ScallopedSeal size={72} className="transform group-hover:scale-105 transition-transform drop-shadow-sm" />
             <div>
-              <div className="flex items-center gap-2.5">
-                <span className="font-serif font-black text-2xl sm:text-3xl tracking-tight text-[#F6F2E9]">
+              <div className="flex items-center gap-2">
+                <span className="font-serif font-bold text-xl sm:text-2xl tracking-tight text-[#F6F2E9]">
                   Notary Passport
                 </span>
-                <span className="bubbly-pill bubbly-pill-verified py-1 px-2.5 text-xs font-black shadow-sm">
+                <span className="bubbly-pill bubbly-pill-verified py-0.5 px-2.5 text-[11px] font-bold">
                   Official Wallet
                 </span>
               </div>
-              <p className="text-xs sm:text-sm text-[#F6F2E9]/90 font-medium font-sans hidden sm:block mt-0.5">
+              <p className="text-xs text-[#F6F2E9]/80 font-medium font-sans hidden sm:block mt-0.5">
                 Verified once, trusted everywhere
               </p>
             </div>
@@ -42,60 +42,60 @@ export const Navbar: React.FC<NavbarProps> = ({ currentMode, onModeChange, pendi
             {/* Prominent State Verification Directory Button */}
             <button
               onClick={onOpenDirectory}
-              className="verify-state-btn px-4 py-2.5 text-xs sm:text-sm font-black shadow-md"
+              className="verify-state-btn px-3.5 py-2 text-xs font-bold shadow-md"
               title="Open Official State & Provincial Verification Directory"
             >
-              <Building className="w-4 h-4 text-[#B8924A]" />
+              <Building className="w-3.5 h-3.5 text-[#B8924A]" />
               State Registries 🏛️
             </button>
 
             {/* View Switcher Tabs */}
-            <nav className="flex items-center gap-1 bg-[#14181F] p-1.5 rounded-2xl border border-[#B8924A]/40 shadow-inner">
+            <nav className="flex items-center gap-1 bg-[#14181F] p-1 rounded-2xl border border-[#B8924A]/40 shadow-inner">
               <button
                 onClick={() => onModeChange('notary_dashboard')}
-                className={`flex items-center gap-1.5 px-3.5 py-2 text-xs sm:text-sm font-bold rounded-xl transition-all ${
+                className={`flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold rounded-xl transition-all ${
                   currentMode === 'notary_dashboard'
-                    ? 'bg-[#B8924A] text-[#14181F] font-black shadow-md'
+                    ? 'bg-[#B8924A] text-[#14181F] font-bold shadow-sm'
                     : 'text-[#F6F2E9]/80 hover:text-[#F6F2E9] hover:bg-[#1B2A4A]'
                 }`}
               >
-                <User className="w-4 h-4" />
+                <User className="w-3.5 h-3.5" />
                 <span className="hidden lg:inline">Notary Vault</span>
               </button>
 
               <button
                 onClick={() => onModeChange('public_profile')}
-                className={`flex items-center gap-1.5 px-3.5 py-2 text-xs sm:text-sm font-bold rounded-xl transition-all ${
+                className={`flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold rounded-xl transition-all ${
                   currentMode === 'public_profile'
-                    ? 'bg-[#B8924A] text-[#14181F] font-black shadow-md'
+                    ? 'bg-[#B8924A] text-[#14181F] font-bold shadow-sm'
                     : 'text-[#F6F2E9]/80 hover:text-[#F6F2E9] hover:bg-[#1B2A4A]'
                 }`}
               >
-                <Share2 className="w-4 h-4" />
+                <Share2 className="w-3.5 h-3.5" />
                 <span className="hidden lg:inline">Public Profile</span>
               </button>
 
               <button
                 onClick={() => onModeChange('business_lookup')}
-                className={`flex items-center gap-1.5 px-3.5 py-2 text-xs sm:text-sm font-bold rounded-xl transition-all ${
+                className={`flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold rounded-xl transition-all ${
                   currentMode === 'business_lookup'
-                    ? 'bg-[#B8924A] text-[#14181F] font-black shadow-md'
+                    ? 'bg-[#B8924A] text-[#14181F] font-bold shadow-sm'
                     : 'text-[#F6F2E9]/80 hover:text-[#F6F2E9] hover:bg-[#1B2A4A]'
                 }`}
               >
-                <Building2 className="w-4 h-4" />
+                <Building2 className="w-3.5 h-3.5" />
                 <span className="hidden lg:inline">Agency Portal</span>
               </button>
 
               <button
                 onClick={() => onModeChange('admin_queue')}
-                className={`relative flex items-center gap-1.5 px-3.5 py-2 text-xs sm:text-sm font-bold rounded-xl transition-all ${
+                className={`relative flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold rounded-xl transition-all ${
                   currentMode === 'admin_queue'
-                    ? 'bg-[#3F6B4F] text-[#F6F2E9] font-black shadow-md'
+                    ? 'bg-[#3F6B4F] text-[#F6F2E9] font-bold shadow-sm'
                     : 'text-[#F6F2E9]/80 hover:text-[#F6F2E9] hover:bg-[#1B2A4A]'
                 }`}
               >
-                <CheckSquare className="w-4 h-4" />
+                <CheckSquare className="w-3.5 h-3.5" />
                 <span className="hidden lg:inline">Registrar Queue</span>
                 {pendingCount > 0 && (
                   <span className="w-4 h-4 rounded-full bg-[#B8924A] text-[#14181F] font-mono font-bold text-[10px] flex items-center justify-center">

@@ -26,10 +26,10 @@ export const ShareLinkModal: React.FC<ShareLinkModalProps> = ({ isOpen, onClose,
         
         {/* Header */}
         <div className="flex items-center justify-between pb-4 border-b border-[#B8924A]/40">
-          <div className="flex items-center gap-3.5">
-            <ScallopedSeal size={60} showAccents={false} />
+          <div className="flex items-center gap-3">
+            <ScallopedSeal size={52} showAccents={false} />
             <div>
-              <h2 className="font-serif font-black text-xl sm:text-2xl text-[#F6F2E9]">Public Verification Link</h2>
+              <h2 className="font-serif font-bold text-xl text-[#F6F2E9]">Public Verification Link</h2>
               <p className="text-xs font-mono font-bold text-[#B8924A]">Zero-Knowledge Share URL</p>
             </div>
           </div>
@@ -39,9 +39,9 @@ export const ShareLinkModal: React.FC<ShareLinkModalProps> = ({ isOpen, onClose,
         </div>
 
         {/* QR Code Container on Paper Cream surface */}
-        <div className="my-5 p-5 bg-[#F6F2E9] border-2 border-[#B8924A] text-center flex flex-col items-center shadow-inner">
-          <div className="p-3.5 bg-[#F6F2E9] border-2 border-[#1B2A4A] mb-2 shadow-md">
-            <svg className="w-40 h-40" viewBox="0 0 100 100" fill="none">
+        <div className="my-5 p-4 bg-[#F6F2E9] border-2 border-[#B8924A] text-center flex flex-col items-center shadow-inner">
+          <div className="p-3 bg-[#F6F2E9] border-2 border-[#1B2A4A] mb-2 shadow-sm">
+            <svg className="w-36 h-36" viewBox="0 0 100 100" fill="none">
               <rect width="100" height="100" fill="#F6F2E9" />
               <path d="M10 10h30v30H10zM60 10h30v30H60zM10 60h30v30H10z" fill="#1B2A4A" />
               <path d="M18 18h14v14H18zM68 18h14v14H68zM18 68h14v14H18z" fill="#F6F2E9" />
@@ -49,8 +49,8 @@ export const ShareLinkModal: React.FC<ShareLinkModalProps> = ({ isOpen, onClose,
               <path d="M50 10h5v15h-5zM50 35h15v5h-15zM75 50h15v5h-15zM50 60h10v10H50zM70 70h20v20H70z" fill="#1B2A4A" />
             </svg>
           </div>
-          <span className="font-serif font-black text-base text-[#14181F]">Scan Passport QR</span>
-          <span className="text-xs font-mono font-bold text-[#14181F]/80">Verified Once · Trusted Everywhere</span>
+          <span className="font-serif font-bold text-base text-[#14181F]">Scan Passport QR</span>
+          <span className="text-xs font-mono font-bold text-[#14181F]/75">Verified Once · Trusted Everywhere</span>
         </div>
 
         {/* Share URL */}
