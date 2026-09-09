@@ -34,7 +34,8 @@ export const INITIAL_CREDENTIALS: Credential[] = [
     verifiedBy: 'State Verification Admin (Official)',
     metadata: {
       commissionNumber: 'TX-13490182-9',
-      issuingAuthority: 'Texas Secretary of State'
+      issuingAuthority: 'Texas Secretary of State',
+      sourceRegistryUrl: 'https://direct.sos.state.tx.us/notary/search.asp'
     }
   },
   {
@@ -108,7 +109,8 @@ export const INITIAL_CREDENTIALS: Credential[] = [
     verifiedAt: '2024-03-03T11:45:00Z',
     verifiedBy: 'NNA Credential API',
     metadata: {
-      issuingAuthority: 'National Notary Association'
+      issuingAuthority: 'National Notary Association',
+      sourceRegistryUrl: 'https://www.nationalnotary.org/verify'
     }
   },
   {
@@ -126,7 +128,8 @@ export const INITIAL_CREDENTIALS: Credential[] = [
     uploadedAt: '2026-09-07T18:45:00Z',
     metadata: {
       commissionNumber: 'RON-TX-88390',
-      issuingAuthority: 'IdentTrust / TX Secretary of State'
+      issuingAuthority: 'IdentTrust / TX Secretary of State',
+      sourceRegistryUrl: 'https://direct.sos.state.tx.us/notary/search.asp'
     }
   }
 ];

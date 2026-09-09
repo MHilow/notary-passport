@@ -81,6 +81,7 @@ export interface Credential {
     coverageAmount?: number;
     issuingAuthority?: string;
     commissionNumber?: string;
+    sourceRegistryUrl?: string; // Direct 1-click link to State SOS Registry
   };
 }
 

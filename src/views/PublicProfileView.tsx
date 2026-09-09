@@ -95,7 +95,20 @@ export const PublicProfileView: React.FC<PublicProfileViewProps> = ({
                     </div>
                   </div>
 
-                  <StatusBadge status={status} />
+                  <div className="flex flex-col items-end gap-2">
+                    <StatusBadge status={status} />
+                    {cred.metadata?.sourceRegistryUrl && (
+                      <a
+                        href={cred.metadata.sourceRegistryUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="text-[10px] font-mono text-[#1B2A4A] hover:underline font-bold flex items-center gap-1 bg-[#F6F2E9] border border-[#1B2A4A]/30 px-2 py-0.5"
+                        title="Verify record directly on official government website"
+                      >
+                        Verify at State Registry ↗
+                      </a>
+                    )}
+                  </div>
                 </div>
               );
             })}

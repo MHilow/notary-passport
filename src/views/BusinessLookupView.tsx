@@ -174,7 +174,20 @@ export const BusinessLookupView: React.FC<BusinessLookupViewProps> = ({
                       </div>
                     </div>
 
-                    <StatusBadge status={status} />
+                    <div className="flex flex-col items-end gap-2">
+                      <StatusBadge status={status} />
+                      {cred.metadata?.sourceRegistryUrl && (
+                        <a
+                          href={cred.metadata.sourceRegistryUrl}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="text-[10px] font-mono text-[#1B2A4A] hover:underline font-bold flex items-center gap-1 bg-white border border-[#1B2A4A]/30 px-2 py-0.5"
+                          title="Open official Secretary of State lookup page"
+                        >
+                          Verify at State Registry ↗
+                        </a>
+                      )}
+                    </div>
                   </div>
                 );
               })}
