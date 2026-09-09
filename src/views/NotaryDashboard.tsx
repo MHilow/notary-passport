@@ -234,16 +234,33 @@ export const NotaryDashboard: React.FC<NotaryDashboardProps> = ({
             </button>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {credentials.map((cred) => (
-              <CredentialCard
-                key={cred.id}
-                credential={cred}
-                onViewDocument={onViewDocument}
-                onDelete={onDeleteCredential}
-              />
-            ))}
-          </div>
+          {credentials.length === 0 ? (
+            <div className="bg-white border-2 border-dashed border-[#E2DBCF] rounded-3xl p-10 text-center space-y-3">
+              <BookOpen className="w-10 h-10 text-[#B8924A] mx-auto" />
+              <h3 className="font-serif font-bold text-lg text-[#14181F]">No Credential Documents Uploaded</h3>
+              <p className="text-xs text-[#14181F]/70 font-sans max-w-sm mx-auto">
+                Upload your notary commission, E&O policy, background check, or state bond to activate zero-knowledge verification.
+              </p>
+              <button
+                onClick={onOpenUpload}
+                className="btn-primary inline-flex items-center gap-2"
+              >
+                <Upload className="w-4 h-4 text-[#B8924A]" />
+                Upload First Credential
+              </button>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {credentials.map((cred) => (
+                <CredentialCard
+                  key={cred.id}
+                  credential={cred}
+                  onViewDocument={onViewDocument}
+                  onDelete={onDeleteCredential}
+                />
+              ))}
+            </div>
+          )}
         </div>
 
         {/* Right 1 Column: Jurisdiction Rules Compliance Engine */}

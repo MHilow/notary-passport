@@ -9,11 +9,12 @@ import { UploadModal } from './components/UploadModal';
 import { AccessGrantModal } from './components/AccessGrantModal';
 import { ShareLinkModal } from './components/ShareLinkModal';
 import { JurisdictionDirectoryModal } from './components/JurisdictionDirectoryModal';
+import { Toast, ToastMessage } from './components/Toast';
 import { PassportSeal } from './components/PassportSeal';
 import { Credential } from './types';
 import { StatusBadge } from './components/StatusBadge';
 import { calculateCredentialStatus } from './services/verificationEngine';
-import { X, Download, ShieldCheck, FileText, ExternalLink, Building } from 'lucide-react';
+import { X, Download, ShieldCheck, FileText, Building } from 'lucide-react';
 
 export function App() {
   const [mode, setMode] = useState<AppMode>('notary_dashboard');
@@ -28,6 +29,17 @@ export function App() {
   const [isGrantsOpen, setIsGrantsOpen] = useState(false);
   const [isDirectoryOpen, setIsDirectoryOpen] = useState(false);
   const [viewingDocument, setViewingDocument] = useState<Credential | null>(null);
+
+  // Toast notifications state
+  const [toasts, setToasts] = useState<ToastMessage[]>([]);
+
+  const addToast = (type: 'success' | 'info' | 'error', title: string, description?: string) => {
+    setToasts(prev => [...prev, { id: Date.now().toString(), type, title, description }]);
+  };
+
+  const dismissToast = (id: string) => {
+    setToasts(prev => prev.filter(t => t.id !== id));
+  };
 
   // Subscribe to storage changes
   useEffect(() => {
@@ -66,7 +78,10 @@ export function App() {
             onOpenShare={() => setIsShareOpen(true)}
             onOpenGrants={() => setIsGrantsOpen(true)}
             onOpenDirectory={() => setIsDirectoryOpen(true)}
-            onDeleteCredential={(id) => storage.deleteCredential(id)}
+            onDeleteCredential={(id) => {
+              storage.deleteCredential(id);
+              addToast('info', 'Credential Deleted', 'Record removed from local vault.');
+            }}
             onViewDocument={(cred) => setViewingDocument(cred)}
           />
         )}
@@ -78,7 +93,7 @@ export function App() {
             accessGrants={accessGrants}
             onRequestAccess={(company, email) => {
               storage.addAccessGrant(company, email);
-              alert(`Shared with ${company} on ${new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}.`);
+              addToast('success', 'Access Request Submitted', `Shared permission request for ${company}.`);
             }}
           />
         )}
@@ -91,7 +106,7 @@ export function App() {
             onViewDocument={(cred) => setViewingDocument(cred)}
             onRequestAccess={(company, email) => {
               storage.addAccessGrant(company, email);
-              alert(`Access request logged for ${company}.`);
+              addToast('success', 'Agency Access Granted', `Viewing permissions requested for ${company}.`);
             }}
           />
         )}
@@ -100,8 +115,14 @@ export function App() {
           <AdminQueueView
             profile={profile}
             credentials={credentials}
-            onVerify={(id, notes) => storage.updateCredentialStatus(id, 'verified', notes)}
-            onReject={(id, reason) => storage.updateCredentialStatus(id, 'rejected', reason)}
+            onVerify={(id, notes) => {
+              storage.updateCredentialStatus(id, 'verified', notes);
+              addToast('success', 'Credential Verified', 'Status updated to Verified on state registry.');
+            }}
+            onReject={(id, reason) => {
+              storage.updateCredentialStatus(id, 'rejected', reason);
+              addToast('error', 'Credential Rejected', 'Rejection reason logged to notary dashboard.');
+            }}
             onViewDocument={(cred) => setViewingDocument(cred)}
           />
         )}
@@ -126,11 +147,17 @@ export function App() {
         </div>
       </footer>
 
+      {/* Floating Toast System */}
+      <Toast toasts={toasts} onDismiss={dismissToast} />
+
       {/* Modals */}
       <UploadModal
         isOpen={isUploadOpen}
         onClose={() => setIsUploadOpen(false)}
-        onUpload={(data) => storage.addCredential(data)}
+        onUpload={(data) => {
+          storage.addCredential(data);
+          addToast('info', 'Credential Submitted', 'Document added to registrar verification queue.');
+        }}
       />
 
       <ShareLinkModal
@@ -143,9 +170,18 @@ export function App() {
         isOpen={isGrantsOpen}
         onClose={() => setIsGrantsOpen(false)}
         grants={accessGrants}
-        onGrantAccess={(name, email) => storage.addAccessGrant(name, email)}
-        onRevokeAccess={(id) => storage.revokeAccessGrant(id)}
-        onApproveRequest={(id) => storage.approveAccessRequest(id)}
+        onGrantAccess={(name, email) => {
+          storage.addAccessGrant(name, email);
+          addToast('success', 'Access Granted', `Granted document access to ${name}.`);
+        }}
+        onRevokeAccess={(id) => {
+          storage.revokeAccessGrant(id);
+          addToast('info', 'Access Revoked', 'Permission revoked for specified organization.');
+        }}
+        onApproveRequest={(id) => {
+          storage.approveAccessRequest(id);
+          addToast('success', 'Request Approved', 'Organization granted document viewing access.');
+        }}
       />
 
       <JurisdictionDirectoryModal
@@ -227,7 +263,7 @@ export function App() {
                 Uploaded: {new Date(viewingDocument.uploadedAt).toLocaleDateString()}
               </span>
               <button
-                onClick={() => alert(`Simulated Download: ${viewingDocument.fileName}`)}
+                onClick={() => addToast('info', 'Document Downloaded', `Saved ${viewingDocument.fileName} locally.`)}
                 className="px-4 py-2 rounded-2xl bg-[#1B2A4A] text-[#F6F2E9] font-bold text-xs flex items-center gap-1.5 shadow-md"
               >
                 <Download className="w-4 h-4 text-[#B8924A]" />

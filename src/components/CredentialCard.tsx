@@ -2,6 +2,7 @@ import React from 'react';
 import { Credential } from '../types';
 import { StatusBadge } from './StatusBadge';
 import { calculateCredentialStatus } from '../services/verificationEngine';
+import { getJurisdiction } from '../data/jurisdictions';
 import { Eye, ExternalLink, ShieldCheck, Trash2 } from 'lucide-react';
 
 interface CredentialCardProps {
@@ -18,7 +19,9 @@ export const CredentialCard: React.FC<CredentialCardProps> = ({
   showActions = true,
 }) => {
   const currentStatus = calculateCredentialStatus(credential);
-  const registryUrl = credential.metadata?.sourceRegistryUrl || 'https://direct.sos.state.tx.us/notary/search.asp';
+  const jurisdiction = getJurisdiction(credential.jurisdictionCode || 'TX');
+  const registryUrl = credential.metadata?.sourceRegistryUrl || jurisdiction?.officialRegistryUrl || 'https://direct.sos.state.tx.us/notary/search.asp';
+  const stateName = jurisdiction?.name || credential.jurisdictionCode || 'State';
 
   return (
     <div className="bubbly-card flex flex-col justify-between">
@@ -48,7 +51,7 @@ export const CredentialCard: React.FC<CredentialCardProps> = ({
             <span className="text-[#14181F]/60 block text-[10px] uppercase font-mono">Verified Authority</span>
             <span className="font-bold text-[#14181F] flex items-center gap-1.5 mt-0.5">
               <ShieldCheck className="w-4 h-4 text-[#3F6B4F]" />
-              {credential.metadata?.issuingAuthority || 'State SOS Office'}
+              {credential.metadata?.issuingAuthority || `${stateName} SOS Office`}
             </span>
           </div>
 
@@ -56,11 +59,11 @@ export const CredentialCard: React.FC<CredentialCardProps> = ({
             href={registryUrl}
             target="_blank"
             rel="noreferrer"
-            className="verify-state-btn shrink-0"
-            title="Verify directly on official government database"
+            className="verify-state-btn shrink-0 justify-center"
+            title={`Verify directly on official ${stateName} government database`}
           >
             <ShieldCheck className="w-3.5 h-3.5 text-[#B8924A]" />
-            Verify at State Registry
+            Verify at {stateName} Registry
             <ExternalLink className="w-3 h-3" />
           </a>
         </div>

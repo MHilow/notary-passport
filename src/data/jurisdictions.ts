@@ -14,6 +14,7 @@ export const JURISDICTIONS: JurisdictionRequirement[] = [
     minInsuranceAmount: 25000,
     requiresBackgroundCheck: true,
     ronAllowed: true,
+    officialRegistryUrl: 'https://direct.sos.state.tx.us/notary/search.asp',
     notes: 'Requires $10,000 state bond. Remote Online Notarization (RON) authorization requires separate state registration & digital certificate.'
   },
   {
@@ -28,6 +29,7 @@ export const JURISDICTIONS: JurisdictionRequirement[] = [
     minInsuranceAmount: 100000,
     requiresBackgroundCheck: true,
     ronAllowed: true,
+    officialRegistryUrl: 'https://notary.cdn.sos.ca.gov/search',
     notes: 'Requires $15,000 surety bond, mandatory Live Scan background check, and 6-hour approved course.'
   },
   {
@@ -42,6 +44,7 @@ export const JURISDICTIONS: JurisdictionRequirement[] = [
     minInsuranceAmount: 25000,
     requiresBackgroundCheck: true,
     ronAllowed: true,
+    officialRegistryUrl: 'https://notaries.dos.state.fl.us/notarysearch',
     notes: 'RON notary requires a $25,000 E&O policy and completion of a 2-hour state-approved RON course.'
   },
   {
@@ -55,6 +58,7 @@ export const JURISDICTIONS: JurisdictionRequirement[] = [
     minInsuranceAmount: 25000,
     requiresBackgroundCheck: true,
     ronAllowed: true,
+    officialRegistryUrl: 'https://dos.ny.gov/licensing-services',
     notes: 'Electronic notarization allowed under Executive Law 135-c. Notaries must register with Department of State.'
   },
   {
@@ -68,6 +72,7 @@ export const JURISDICTIONS: JurisdictionRequirement[] = [
     minInsuranceAmount: 25000,
     requiresBackgroundCheck: true,
     ronAllowed: true,
+    officialRegistryUrl: 'https://notary.ohiosos.gov/search',
     notes: 'Criminal records check required. Online Notary authorization requires 5-year online commission.'
   },
 
@@ -83,6 +88,7 @@ export const JURISDICTIONS: JurisdictionRequirement[] = [
     minInsuranceAmount: 1000000,
     requiresBackgroundCheck: true,
     ronAllowed: true,
+    officialRegistryUrl: 'https://lso.ca/public-resources/finding-a-lawyer-or-paralegal',
     notes: 'Governed by the Notaries Act. Remote commissioning permitted under Law Society guidelines.'
   },
   {
@@ -97,6 +103,7 @@ export const JURISDICTIONS: JurisdictionRequirement[] = [
     minInsuranceAmount: 1000000,
     requiresBackgroundCheck: true,
     ronAllowed: true,
+    officialRegistryUrl: 'https://www.snpbc.ca/find-a-notary/',
     notes: 'Supervised by the Society of Notaries Public of BC. Mandatory professional indemnity insurance.'
   },
   {
@@ -110,6 +117,7 @@ export const JURISDICTIONS: JurisdictionRequirement[] = [
     minInsuranceAmount: 500000,
     requiresBackgroundCheck: true,
     ronAllowed: true,
+    officialRegistryUrl: 'https://www.alberta.ca/notaries-public',
     notes: 'Notary appointments issued by Minister of Justice. Virtual witnessing supported.'
   }
 ];

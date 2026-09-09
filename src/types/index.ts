@@ -49,6 +49,7 @@ export interface JurisdictionRequirement {
   requiresBackgroundCheck: boolean;
   ronAllowed: boolean;
   notes: string;
+  officialRegistryUrl?: string;
 }
 
 export interface NotaryJurisdiction {
