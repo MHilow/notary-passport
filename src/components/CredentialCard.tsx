@@ -29,39 +29,45 @@ export const CredentialCard: React.FC<CredentialCardProps> = ({
       
       {/* Top Header */}
       <div className="space-y-3">
-        <div className="flex items-start justify-between gap-3">
-          <div className="flex items-start gap-2.5 min-w-0 flex-1">
-            <PassportSeal size={32} variant="navy" className="shrink-0 mt-0.5 opacity-90" />
-            <div className="min-w-0 flex-1">
-              <h3 className="font-serif font-bold text-base text-[#1B2A4A] leading-snug break-words">
-                {credential.title}
-              </h3>
-              <p className="text-xs text-[#14181F]/70 font-mono mt-0.5 truncate">
-                {credential.metadata?.policyNumber
-                  ? `Policy #${credential.metadata.policyNumber}`
-                  : credential.metadata?.commissionNumber
-                  ? `Commission #${credential.metadata.commissionNumber}`
-                  : credential.fileName}
-                {credential.jurisdictionCode && ` · ${credential.jurisdictionCode}`}
-              </p>
-            </div>
+        {/* Seal and Status Badge Bar */}
+        <div className="flex items-center justify-between gap-3">
+          <div className="flex items-center gap-2">
+            <PassportSeal size={28} variant="navy" className="shrink-0 opacity-90" />
+            {credential.jurisdictionCode && (
+              <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-[#1B2A4A] bg-[#F6F2E9] border border-[#1B2A4A]/20 px-2 py-0.5 rounded-md">
+                {credential.jurisdictionCode} Jurisdiction
+              </span>
+            )}
           </div>
-
           <div className="shrink-0">
             <StatusBadge status={currentStatus} />
           </div>
         </div>
 
+        {/* Title and Policy / Commission Subtitle Block */}
+        <div className="space-y-1">
+          <h3 className="font-serif font-bold text-base text-[#1B2A4A] leading-snug break-words">
+            {credential.title}
+          </h3>
+          <p className="text-xs text-[#14181F]/75 font-mono leading-normal break-words">
+            {credential.metadata?.policyNumber
+              ? `Policy #${credential.metadata.policyNumber}`
+              : credential.metadata?.commissionNumber
+              ? `Commission #${credential.metadata.commissionNumber}`
+              : credential.fileName}
+          </p>
+        </div>
+
         {/* Issuing Authority & Prominent 1-Click State Verification Button */}
         <div className="p-3.5 rounded-2xl bg-[#F6F2E9] border border-[#E2DBCF] space-y-2.5 text-xs">
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between gap-2">
             <span className="text-[#14181F]/60 block text-[10px] uppercase font-mono font-bold">Verified Authority</span>
-            <span className="font-bold text-[#3F6B4F] flex items-center gap-1 text-[10px] font-mono">
+            <span className="font-bold text-[#3F6B4F] flex items-center gap-1 text-[10px] font-mono shrink-0">
               <ShieldCheck className="w-3.5 h-3.5 text-[#3F6B4F]" /> Government Server
             </span>
           </div>
 
-          <div className="font-bold text-[#14181F] text-xs">
+          <div className="font-bold text-[#14181F] text-xs leading-normal break-words">
             {credential.metadata?.issuingAuthority || `${stateName} SOS Office`}
           </div>
 
@@ -95,7 +101,7 @@ export const CredentialCard: React.FC<CredentialCardProps> = ({
 
         {/* Rejection Note if any */}
         {credential.status === 'rejected' && credential.rejectionReason && (
-          <div className="p-2.5 rounded-xl bg-[#7A3B34]/10 border border-[#7A3B34]/30 text-[#7A3B34] text-xs">
+          <div className="p-2.5 rounded-xl bg-[#7A3B34]/10 border border-[#7A3B34]/30 text-[#7A3B34] text-xs break-words">
             <strong>Rejection Note:</strong> {credential.rejectionReason}
           </div>
         )}
@@ -103,16 +109,16 @@ export const CredentialCard: React.FC<CredentialCardProps> = ({
 
       {/* Footer Actions */}
       {showActions && (
-        <div className="flex items-center justify-between pt-3 border-t border-[#E2DBCF]">
-          <span className="text-[11px] font-mono text-[#3F6B4F] font-bold truncate">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 pt-3 border-t border-[#E2DBCF]">
+          <span className="text-[11px] font-mono text-[#3F6B4F] font-bold leading-tight break-words min-w-0 flex-1">
             ✓ Certified by {credential.verifiedBy || 'Registrar API'}
           </span>
 
-          <div className="flex items-center gap-2 shrink-0">
+          <div className="flex items-center gap-2 shrink-0 self-end sm:self-auto">
             {onViewDocument && (
               <button
                 onClick={() => onViewDocument(credential)}
-                className="px-3 py-1.5 rounded-xl bg-[#1B2A4A] hover:bg-[#121D33] text-[#F6F2E9] text-xs font-semibold flex items-center gap-1.5 shadow-sm transition-all"
+                className="px-3 py-1.5 rounded-xl bg-[#1B2A4A] hover:bg-[#121D33] text-[#F6F2E9] text-xs font-semibold flex items-center gap-1.5 shadow-sm transition-all shrink-0"
                 title="Inspect Official Document PDF"
               >
                 <Eye className="w-3.5 h-3.5 text-[#B8924A]" />
@@ -123,7 +129,7 @@ export const CredentialCard: React.FC<CredentialCardProps> = ({
             {onDelete && (
               <button
                 onClick={() => onDelete(credential.id)}
-                className="p-1.5 rounded-xl text-[#7A3B34] hover:bg-[#7A3B34]/10 transition-all"
+                className="p-1.5 rounded-xl text-[#7A3B34] hover:bg-[#7A3B34]/10 transition-all shrink-0"
                 title="Remove Record"
               >
                 <Trash2 className="w-3.5 h-3.5" />
