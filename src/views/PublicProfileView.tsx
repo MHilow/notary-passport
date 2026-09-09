@@ -53,17 +53,17 @@ export const PublicProfileView: React.FC<PublicProfileViewProps> = ({
       <div className="bg-[#1B2A4A] text-[#F6F2E9] border-2 border-[#B8924A] p-6 sm:p-8 corner-bracket space-y-6">
         
         <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6 border-b border-[#B8924A]/40 pb-6">
-          <ScallopedSeal size={104} />
-          <div className="text-center sm:text-left space-y-1">
+          <ScallopedSeal size={128} className="drop-shadow-lg shrink-0" />
+          <div className="text-center sm:text-left space-y-2">
             <div className="flex items-center justify-center sm:justify-start gap-3 flex-wrap">
-              <h1 className="font-serif font-bold text-2xl sm:text-3xl text-[#F6F2E9]">{profile.fullName}</h1>
-              <span className="badge-verified">
+              <h1 className="font-serif font-black text-3xl sm:text-4xl text-[#F6F2E9] tracking-tight">{profile.fullName}</h1>
+              <span className="badge-verified px-3 py-1 text-xs font-black">
                 VERIFIED PROFILE
               </span>
             </div>
-            <p className="text-xs text-[#F6F2E9]/80 max-w-xl">{profile.bio}</p>
+            <p className="text-sm text-[#F6F2E9]/90 max-w-xl leading-relaxed">{profile.bio}</p>
             
-            <div className="flex items-center justify-center sm:justify-start gap-4 text-xs font-mono text-[#B8924A] pt-2">
+            <div className="flex items-center justify-center sm:justify-start gap-4 text-xs sm:text-sm font-mono text-[#B8924A] pt-2">
               <span>Jurisdiction: <strong className="text-[#F6F2E9]">{profile.primaryJurisdiction} ({profile.country})</strong></span>
               <span>•</span>
               <span>RON Authorized: <strong className="text-[#F6F2E9]">{profile.isRonApproved ? 'Yes' : 'No'}</strong></span>

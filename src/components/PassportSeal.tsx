@@ -1,13 +1,13 @@
 import React from 'react';
 
 interface PassportSealProps {
-  size?: number; // e.g. 56 or 80
+  size?: number; // e.g. 64 or 84
   variant?: 'navy' | 'gold' | 'cream';
   className?: string;
 }
 
 export const PassportSeal: React.FC<PassportSealProps> = ({
-  size = 56,
+  size = 64,
   variant = 'gold',
   className = '',
 }) => {
@@ -27,20 +27,20 @@ export const PassportSeal: React.FC<PassportSealProps> = ({
         xmlns="http://www.w3.org/2000/svg"
       >
         {/* Outer Ring */}
-        <circle cx="60" cy="60" r="56" stroke={color} strokeWidth="2.5" />
+        <circle cx="60" cy="60" r="55" stroke={color} strokeWidth="3.5" />
         {/* Inner Ring */}
-        <circle cx="60" cy="60" r="50" stroke={color} strokeWidth="1" />
+        <circle cx="60" cy="60" r="48" stroke={color} strokeWidth="1.5" />
 
         {/* Top Text */}
         <text
           x="60"
-          y="28"
+          y="27"
           fill={color}
-          fontSize="9"
-          fontWeight="600"
+          fontSize="10.5"
+          fontWeight="800"
           fontFamily="IBM Plex Sans, sans-serif"
           textAnchor="middle"
-          letterSpacing="1.2"
+          letterSpacing="1.4"
         >
           NOTARY PASSPORT
         </text>
@@ -50,8 +50,8 @@ export const PassportSeal: React.FC<PassportSealProps> = ({
           x="60"
           y="66"
           fill={color}
-          fontSize="30"
-          fontWeight="700"
+          fontSize="36"
+          fontWeight="900"
           fontFamily="Fraunces, serif"
           textAnchor="middle"
         >
@@ -61,10 +61,10 @@ export const PassportSeal: React.FC<PassportSealProps> = ({
         {/* Bottom Text */}
         <text
           x="60"
-          y="95"
+          y="94"
           fill={color}
-          fontSize="7.5"
-          fontWeight="600"
+          fontSize="9"
+          fontWeight="800"
           fontFamily="IBM Plex Sans, sans-serif"
           textAnchor="middle"
           letterSpacing="1.5"
@@ -75,3 +75,4 @@ export const PassportSeal: React.FC<PassportSealProps> = ({
     </div>
   );
 };
+

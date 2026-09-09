@@ -38,16 +38,16 @@ export const BusinessLookupView: React.FC<BusinessLookupViewProps> = ({
       <div className="bg-[#1B2A4A] text-[#F6F2E9] border-2 border-[#B8924A] p-6 sm:p-8 corner-bracket">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
           
-          <div className="flex items-center gap-4">
-            <PassportSeal size={64} variant="gold" />
-            <div className="space-y-1">
-              <span className="px-2 py-0.5 text-[10px] font-mono font-bold bg-[#B8924A]/20 text-[#B8924A] border border-[#B8924A] uppercase">
+          <div className="flex items-center gap-5">
+            <PassportSeal size={80} variant="gold" className="drop-shadow-md" />
+            <div className="space-y-1.5">
+              <span className="px-2.5 py-1 text-xs font-mono font-black bg-[#B8924A]/20 text-[#B8924A] border border-[#B8924A] uppercase tracking-wider">
                 VERIFYING BUSINESS PORTAL
               </span>
-              <h1 className="font-serif font-bold text-2xl sm:text-3xl text-[#F6F2E9]">
+              <h1 className="font-serif font-black text-2xl sm:text-3xl text-[#F6F2E9] tracking-tight">
                 Title & Signing Compliance Verification
               </h1>
-              <p className="text-xs text-[#F6F2E9]/80 font-sans">
+              <p className="text-xs sm:text-sm text-[#F6F2E9]/90 font-sans">
                 Real-time credential status verification for work assignment.
               </p>
             </div>

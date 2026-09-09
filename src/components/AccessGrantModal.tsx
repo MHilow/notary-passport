@@ -41,14 +41,14 @@ export const AccessGrantModal: React.FC<AccessGrantModalProps> = ({
         
         {/* Header */}
         <div className="flex items-center justify-between pb-4 border-b border-[#B8924A]/40">
-          <div className="flex items-center gap-3">
-            <PassportSeal size={48} variant="gold" />
+          <div className="flex items-center gap-3.5">
+            <PassportSeal size={60} variant="gold" className="drop-shadow-md" />
             <div>
-              <h2 className="font-serif font-bold text-xl text-[#F6F2E9]">Document Access Grants</h2>
-              <p className="text-xs font-mono text-[#B8924A]">Authorized Agencies & Platforms</p>
+              <h2 className="font-serif font-black text-xl sm:text-2xl text-[#F6F2E9]">Document Access Grants</h2>
+              <p className="text-xs font-mono font-bold text-[#B8924A]">Authorized Agencies & Platforms</p>
             </div>
           </div>
-          <button onClick={onClose} className="p-1 text-[#F6F2E9]/60 hover:text-[#F6F2E9]">
+          <button onClick={onClose} className="p-1.5 text-[#F6F2E9]/60 hover:text-[#F6F2E9] rounded-xl hover:bg-[#14181F]">
             <X className="w-5 h-5" />
           </button>
         </div>

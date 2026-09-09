@@ -64,25 +64,25 @@ export const NotaryDashboard: React.FC<NotaryDashboardProps> = ({
       <div className="official-hero-panel p-6 sm:p-8">
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
           
-          <div className="flex items-start sm:items-center gap-6">
-            <ScallopedSeal size={104} />
-            <div className="space-y-1">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6">
+            <ScallopedSeal size={128} className="drop-shadow-xl shrink-0" />
+            <div className="space-y-2">
               <div className="flex items-center gap-3 flex-wrap">
-                <h1 className="font-serif font-bold text-2xl sm:text-3xl text-[#F6F2E9]">
+                <h1 className="font-serif font-black text-3xl sm:text-4xl text-[#F6F2E9] tracking-tight">
                   Welcome back, {profile.fullName.split(' ')[0]}
                 </h1>
-                <span className="bubbly-pill bubbly-pill-verified">
+                <span className="bubbly-pill bubbly-pill-verified text-xs px-3 py-1 font-bold shadow-sm">
                   Passport Active
                 </span>
                 {profile.isRonApproved && (
-                  <span className="bubbly-pill bubbly-pill-gold">
-                    <Globe className="w-3.5 h-3.5" /> RON Authorized
+                  <span className="bubbly-pill bubbly-pill-gold text-xs px-3 py-1 font-bold shadow-sm">
+                    <Globe className="w-4 h-4" /> RON Authorized
                   </span>
                 )}
               </div>
-              <p className="text-xs sm:text-sm text-[#F6F2E9]/80 font-sans max-w-xl leading-relaxed">{profile.bio}</p>
+              <p className="text-sm sm:text-base text-[#F6F2E9]/90 font-sans max-w-xl leading-relaxed">{profile.bio}</p>
               
-              <div className="flex items-center gap-4 text-xs font-mono text-[#B8924A] pt-1">
+              <div className="flex items-center gap-4 text-xs sm:text-sm font-mono text-[#B8924A] pt-1">
                 <span>Primary State: <strong className="text-[#F6F2E9]">{profile.primaryJurisdiction} ({profile.country})</strong></span>
                 <span>•</span>
                 <span>Passport Handle: <strong className="text-[#F6F2E9]">@{profile.handle}</strong></span>
@@ -94,28 +94,28 @@ export const NotaryDashboard: React.FC<NotaryDashboardProps> = ({
           <div className="flex items-center gap-3 shrink-0 flex-wrap">
             <button
               onClick={onOpenUpload}
-              className="px-4 py-2.5 rounded-2xl bg-[#B8924A] hover:bg-[#d4af65] text-[#14181F] font-bold text-xs flex items-center gap-2 border border-[#F6F2E9]/40 shadow-lg transition-all transform hover:-translate-y-0.5"
+              className="px-5 py-3 rounded-2xl bg-[#B8924A] hover:bg-[#d4af65] text-[#14181F] font-black text-xs sm:text-sm flex items-center gap-2 border border-[#F6F2E9]/40 shadow-xl transition-all transform hover:-translate-y-0.5"
             >
-              <Upload className="w-4 h-4" />
+              <Upload className="w-4 h-4 sm:w-5 sm:h-5" />
               Upload Credential
             </button>
 
             <button
               onClick={onOpenShare}
-              className="px-4 py-2.5 rounded-2xl bg-[#14181F] hover:bg-[#0C1424] text-[#F6F2E9] font-semibold text-xs flex items-center gap-2 border border-[#B8924A]/60 transition-all"
+              className="px-5 py-3 rounded-2xl bg-[#14181F] hover:bg-[#0C1424] text-[#F6F2E9] font-bold text-xs sm:text-sm flex items-center gap-2 border border-[#B8924A]/60 shadow-md transition-all"
             >
-              <Share2 className="w-4 h-4 text-[#B8924A]" />
+              <Share2 className="w-4 h-4 sm:w-5 sm:h-5 text-[#B8924A]" />
               Share Link & QR
             </button>
 
             <button
               onClick={onOpenGrants}
-              className="relative px-4 py-2.5 rounded-2xl bg-[#14181F] hover:bg-[#0C1424] text-[#F6F2E9] font-semibold text-xs flex items-center gap-2 border border-[#B8924A]/60 transition-all"
+              className="relative px-5 py-3 rounded-2xl bg-[#14181F] hover:bg-[#0C1424] text-[#F6F2E9] font-bold text-xs sm:text-sm flex items-center gap-2 border border-[#B8924A]/60 shadow-md transition-all"
             >
-              <Key className="w-4 h-4 text-[#B8924A]" />
+              <Key className="w-4 h-4 sm:w-5 sm:h-5 text-[#B8924A]" />
               Access Grants ({activeGrants.length})
               {pendingRequests.length > 0 && (
-                <span className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-[#7A3B34] text-[#F6F2E9] font-mono font-bold text-[10px] flex items-center justify-center border border-[#B8924A]">
+                <span className="absolute -top-1.5 -right-1.5 w-6 h-6 rounded-full bg-[#7A3B34] text-[#F6F2E9] font-mono font-bold text-xs flex items-center justify-center border border-[#B8924A] shadow-md">
                   {pendingRequests.length}
                 </span>
               )}

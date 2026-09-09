@@ -83,11 +83,11 @@ export const UploadModal: React.FC<UploadModalProps> = ({ isOpen, onClose, onUpl
         
         {/* Header */}
         <div className="flex items-center justify-between pb-4 border-b border-[#B8924A]/40">
-          <div className="flex items-center gap-3">
-            <PassportSeal size={48} variant="gold" />
+          <div className="flex items-center gap-3.5">
+            <PassportSeal size={60} variant="gold" className="drop-shadow-md" />
             <div>
-              <h2 className="font-serif font-bold text-xl text-[#F6F2E9]">Upload Credential</h2>
-              <p className="text-xs font-mono text-[#B8924A]">Encrypted Submission Ledger</p>
+              <h2 className="font-serif font-black text-xl sm:text-2xl text-[#F6F2E9]">Upload Credential</h2>
+              <p className="text-xs font-mono font-bold text-[#B8924A]">Encrypted Submission Ledger</p>
             </div>
           </div>
           <button
